@@ -1,11 +1,10 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from Kalima.views import DefaultView
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'Kalima.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-    url(r'dictionary', include('Dictionary.urls', namespace='dictionary')),
-
+    url(r'^auth/', include('allauth.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^dictionary/', include('Dictionary.urls', namespace='dictionary')),
+    url(r'^$', DefaultView.as_view()),
 )

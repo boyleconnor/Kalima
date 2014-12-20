@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% load i18n %}
 
@@ -7,15 +7,21 @@
 {% block content %}
     <table>
         <tr>
-            <td>{% trans 'Spelling' %}</td>
+            <td>{% trans "Spelling" %}</td>
             <td>{{ word }}</td>
         </tr>
         <tr>
-            <td>{% trans 'Part of Speech' %}</td>
-            <td>{{ word.pos }}</td>
+            <td>{% trans "Part of Speech" %}</td>
+            <td>{{ word.get_pos_display }}</td>
         </tr>
+        {% if word.stem %}
+            <tr>
+                <td>{% trans "Stem" %}</td>
+                <td><a href="{{ word.stem.get_detail_url }}">{{ word.stem }}</a></td>
+            </tr>
+        {% endif %}
         <tr>
-            <td>{% trans 'Definition' %}</td>
+            <td>{% trans "Definition" %}</td>
             <td>{{ word.definition }}</td>
         </tr>
     </table>
