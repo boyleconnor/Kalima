@@ -5,20 +5,19 @@
 {% block title %} {% trans "Home" %} {% endblock %}
 
 {% block content %}
-    <h1>مرحبا في كلمة!</h1>
-    <p>Welcome to Kalima</p>
-    <table>
+    <h1>أهلاً و سهلاً في كلمة -  Welcome to Kalima</h1>
+    <table class="table">
         <tr>
             <th>{% trans 'Word' %}</th>
             <th>{% trans 'Part of Speech' %}</th>
             <th>{% trans 'Definition' %}</th>
         </tr>
         {% for word in words %}
-        <tr>
-            <td><a href="{{ word.get_absolute_url }}">{{ word }}</a></td>
-            <td>{{ word.get_pos_display }}</td>
-            <td>{{ word.definition }}</td>
-        </tr>
+            <tr>
+                <td><a href="{{ word.get_absolute_url }}">{{ word }}</a></td>
+                <td>{{ word.get_pos_display }}</td>
+                <td>{{ word.definition|default:"<p><i>None</i></p>" }}</td>
+            </tr>
         {% endfor %}
     </table>
 {% endblock %}

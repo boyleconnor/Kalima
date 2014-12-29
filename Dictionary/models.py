@@ -1,7 +1,8 @@
+from ArabicTools.utils import transcribe, strip_diacritics
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Model, ForeignKey, CharField, TextField
 import re
-from ArabicTools.constants import POS_CHOICES, ABJAD
+from ArabicTools.constants import POS_CHOICES, ABJAD, ARABIZI, SHADDA
 
 
 class Word(Model):
@@ -20,6 +21,15 @@ class Word(Model):
             return stem
         else:
             return stem.get_root()
+
+    def get_arabizi(self):
+        return transcribe(self.spelling, ARABIZI)
+
+    def get_without_diacritics(self):
+        return strip_diacritics(self.spelling)
+
+    def get_key_spelling(self):
+        return strip_diacritics(self.spelling, (SHADDA,))
 
     def get_update_url(self):
         return reverse_lazy('dictionary:word.update', kwargs={'pk': self.pk})

@@ -41,7 +41,8 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    #'guardian',
+    'haystack',
+    'guardian',
     'rest_framework',
     'Dictionary',
 )
@@ -90,6 +91,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'Kalima/static/'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'Kalima/static_root/')
+
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'Kalima/templates'),
 )
@@ -112,9 +119,11 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend'
 )
 
+ANONYMOUS_USER_ID = -1
+
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = 'accounts/login/'
-LOGOUT_URL = 'accounts/logout/'
+LOGIN_URL = '/auth/login/'
+LOGOUT_URL = '/auth/logout/'
 
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = {
@@ -125,3 +134,10 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SITE_ID = 1
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}

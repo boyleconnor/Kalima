@@ -1,6 +1,16 @@
+{% load i18n %}
 <html>
-<title>Kalima كلمة - {% block title %} {% endblock %}</title>
+<head>
+    <title>{% block title %}{% endblock %} - Kalima</title>
+</head>
 <body>
+<div id="nav-bar">
+    {% if user.is_authenticated %}
+        {% trans 'Current User: ' %}{{ user }}&nbsp;<a href="{% url 'account_logout' %}">{% trans 'Log Out' %}</a>
+    {% else %}
+        <a href="{% url 'account_login' %}">{% trans 'Log In' %}</a>
+    {% endif %}
+</div>
 {% block content %}{% endblock %}
 </body>
 </html>

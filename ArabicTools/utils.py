@@ -1,8 +1,4 @@
-from ArabicTools.constants import TASHKEEL
-
-
-def search_pattern(word):
-        return '^' + ''.join(['(%s[%s]*)' % (i, TASHKEEL) for i in word]) + '$'
+from ArabicTools.constants import TASHKEEL, DIACRITICS, SHADDA
 
 
 def match_to_template():
@@ -16,3 +12,22 @@ def spelling_to_template(word, root=('ف', 'ع', 'ل')):
     for i, j in enumerate(root):
         word.replace(j, ('\\%s' % i))
     return word
+
+
+def transcribe(spelling, code):
+    output = ''
+    for letter in spelling:
+        new_letter = code[letter]
+        if new_letter == '-':
+            output += output[-1]
+        else:
+            output += new_letter
+    return output
+
+
+def strip_diacritics(spelling, leave=[]):
+    output = ''
+    for letter in spelling:
+        if (letter not in DIACRITICS) or (letter in leave):
+            output += letter
+    return output

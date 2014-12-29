@@ -80,6 +80,8 @@ YAA = 'ي'
 
 HAMZA = 'ء'
 
+TAA_MARBUTA = 'ة'
+
 ALIF_MAQSURA = 'ى'
 
 VOWELS = ALIF + WAW + YAA + ALIF_MAQSURA
@@ -101,3 +103,46 @@ POS_CHOICES = (
 ARABIC_LANGUAGE_CODE = 'ar'
 
 ENGLISH_LANGUAGE_CODE = 'en'
+
+ARABIZI = {
+    FATHA: 'a',
+    KASRA: 'i',
+    DAMMA: 'u',
+    SHADDA: '-',
+    SUKUN: '',
+    FATHAN: 'an',
+    KASRAN: 'in',
+    DAMMAN: 'un',
+    ALIF: '-',
+    BAA: 'b',
+    TAA: 't',
+    THAA: 'tx',
+    JIM: 'j',
+    HHAA: '7',
+    XAA: 'kx',
+    DAL: 'd',
+    DHAL: 'dx',
+    RAA: 'r',
+    ZAYN: 'z',
+    SIN: 's',
+    SHIN: 'sh',
+    SAD: 'S',
+    DAD: 'D',
+    TTAA: 'T',
+    ZZAA: 'Dx',
+    EIN: '3',
+    GHAIN: 'gx',
+    FAA: 'f',
+    QAF: 'q',
+    KAF: 'k',
+    LAM: 'l',
+    MIM: 'm',
+    NUN: 'n',
+    HAA: 'h',
+    WAW: 'w',
+    YAA: 'y',
+    HAMZA: '2',
+    TAA_MARBUTA: 'h'
+}
+
+ARABISH = {}
