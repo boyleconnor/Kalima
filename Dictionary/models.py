@@ -2,7 +2,7 @@ from ArabicTools.utils import transcribe, strip_diacritics
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Model, ForeignKey, CharField, TextField
 import re
-from ArabicTools.constants import POS_CHOICES, ABJAD, ARABIZI, SHADDA
+from ArabicTools.constants import POS_CHOICES, ABJAD, ARABIZI, SHADDA, DEFAULT_ROOT_ID
 
 
 class Word(Model):
@@ -54,6 +54,13 @@ class Deriver(Model):
     template = CharField(max_length=255)
     name = CharField(max_length=63, blank=True)
 
+    def get_expectation_display(self):
+        return self.expectation
+
+    def get_template_display(self):
+        default_root = Word.objects.get(id=DEFAULT_ROOT_ID)
+        return self.apply_spelling(default_root)
+
     def apply_spelling(self, word_in):
         if type(word_in) is not Word:
             raise TypeError('Type of ''word_in'' must be ''dictionary.Word''')
@@ -66,6 +73,12 @@ class Deriver(Model):
         result = self.apply(stem)
         result.save()
         return result
+
+    def get_update_url(self):
+        pass
+
+    def get_absolute_url(self):
+        pass
 
     def __str__(self):
         return self.name

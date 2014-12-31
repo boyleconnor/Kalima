@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{{ deriver }}{% endblock %}
+
+{% block content %}
+    <h1>{{ deriver }}</h1>
+    <table>
+        <tr>
+            <td>{% trans 'Origin Part of Speech' %}</td>
+            <td>{{ deriver.get_origin_pos_display }}</td>
+        </tr>
+        <tr>
+            <td>{% trans 'Origin Form' %}</td>
+            <td>{{ deriver.get_expectation_display }}</td>
+        </tr>
+        <tr>
+            <td>{% trans 'Result Part of Speech' %}</td>
+            <td>{{ deriver.get_result_pos_display }}</td>
+        </tr>
+        <tr>
+            <td>{% trans "Result Form" %}</td>
+            <td>{{ deriver.get_template_display }}</td>
+        </tr>
+    </table>
+    <div id="foot">
+        <a href="{{ deriver.get_update_url }}">{% trans 'Edit' %}</a>
+        <a href="{{ deriver.get_delete_url }}">{% trans 'Delete' %}</a>
+    </div>
+{% endblock %}

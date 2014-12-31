@@ -112,6 +112,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
+    'Dictionary.context_processors.search',
 )
 
 AUTHENTICATION_BACKENDS = (

@@ -1,5 +1,7 @@
 ROOT_LENGTHS = (3, 4)
 
+DEFAULT_ROOT_ID = 1
+
 FATHA = 'َ'
 
 KASRA = 'ِ'
@@ -116,12 +118,12 @@ ARABIZI = {
     ALIF: '-',
     BAA: 'b',
     TAA: 't',
-    THAA: 'tx',
+    THAA: 'tv',
     JIM: 'j',
     HHAA: '7',
-    XAA: 'kx',
+    XAA: 'kv',
     DAL: 'd',
-    DHAL: 'dx',
+    DHAL: 'dv',
     RAA: 'r',
     ZAYN: 'z',
     SIN: 's',
@@ -129,9 +131,9 @@ ARABIZI = {
     SAD: 'S',
     DAD: 'D',
     TTAA: 'T',
-    ZZAA: 'Dx',
+    ZZAA: 'Dv',
     EIN: '3',
-    GHAIN: 'gx',
+    GHAIN: 'gv',
     FAA: 'f',
     QAF: 'q',
     KAF: 'k',
