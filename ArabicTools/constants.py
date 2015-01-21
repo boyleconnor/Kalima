@@ -1,6 +1,6 @@
 ROOT_LENGTHS = (3, 4)
 
-DEFAULT_ROOT_ID = 1
+DEFAULT_ROOT = 'فعل'
 
 FATHA = 'َ'
 

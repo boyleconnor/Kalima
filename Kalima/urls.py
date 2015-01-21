@@ -1,6 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from Kalima.views import DefaultView
+from django.contrib.auth.views import redirect_to_login
+from django.shortcuts import render
+
 
 urlpatterns = patterns('',
     url(r'^auth/', include('allauth.urls')),
@@ -9,3 +12,9 @@ urlpatterns = patterns('',
     url(r'^search/', include('haystack.urls')),
     url(r'^$', DefaultView.as_view()),
 )
+
+
+def handler403(request):
+    if request.user.is_authenticated():
+        return render(request, 'errors/403.html')
+    return redirect_to_login(request.path)

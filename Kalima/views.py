@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import RedirectView
+from django.views.generic import TemplateView, RedirectView, View
 
 
 class DefaultView(RedirectView):

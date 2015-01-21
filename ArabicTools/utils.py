@@ -1,8 +1,48 @@
-from ArabicTools.constants import TASHKEEL, DIACRITICS, SHADDA
+from copy import copy
+from ArabicTools.constants import TASHKEEL, DIACRITICS, SHADDA, DEFAULT_ROOT
 
 
-def match_to_template():
-    pass
+def form_to_template(form, root=DEFAULT_ROOT):
+    template = ''
+    counter = 0
+    for letter in form:
+        if letter == form[counter]:
+            template += 'x'
+        else:
+            template += letter
+    return template
+
+
+def template_to_form(template, root=DEFAULT_ROOT):
+    form = ''
+    counter = 0
+    for letter in template:
+        if letter == 'x':
+            form += root[counter]
+            counter += 1
+        else:
+            form += letter
+    return form
+
+
+def extracter(word, form):
+    if len(word) == len(form):
+        iterations = len(word)
+    word_copy = copy(word)
+    for i in range(len(word)):
+        pass
+
+
+def apply(root_spelling, template):
+    result = ''
+    counter = 0
+    for letter in template:
+        if letter == 'x':
+            result += root_spelling[counter]
+            counter += 1
+        else:
+            result += letter
+    return result
 
 
 def spelling_to_template(word, root=('ف', 'ع', 'ل')):
