@@ -8,20 +8,22 @@
     <h1>{{ deriver }}</h1>
     <table>
         <tr>
-            <td>{% trans 'Origin Part of Speech' %}</td>
+            <td rowspan="2">{% trans 'Origin' %}</td>
+            <td>{% trans 'Part of Speech' %}</td>
             <td>{{ deriver.get_origin_pos_display }}</td>
         </tr>
         <tr>
-            <td>{% trans 'Origin Form' %}</td>
-            <td>{{ deriver.get_expectation_display }}</td>
+            <td>{% trans 'Form' %}</td>
+            <td>{{ deriver.get_origin_form_display }}</td>
         </tr>
         <tr>
-            <td>{% trans 'Result Part of Speech' %}</td>
+            <td rowspan="2">{% trans 'Result' %}</td>
+            <td>{% trans 'Part of Speech' %}</td>
             <td>{{ deriver.get_result_pos_display }}</td>
         </tr>
         <tr>
-            <td>{% trans "Result Form" %}</td>
-            <td>{{ deriver.get_template_display }}</td>
+            <td>{% trans 'Form' %}</td>
+            <td>{{ deriver.get_result_form_display }}</td>
         </tr>
     </table>
     <div id="foot">
