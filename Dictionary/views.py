@@ -1,7 +1,6 @@
-from Dictionary.forms import WordSearchForm, WordForm
-from Utils.mixins import ModelPermRequiredMixin
+from Dictionary.forms import WordSearchForm, WordForm, DeriverForm
+from Utils.mixins import ModelPermRequiredMixin, ObjPermRequiredMixin
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
-from guardian.mixins import PermissionRequiredMixin as ObjPermRequiredMixin
 from Dictionary.models import Word, Deriver
 from haystack.views import SearchView, search_view_factory
 
@@ -42,6 +41,13 @@ class WordUpdate(ObjPermRequiredMixin, UpdateView):
 class WordDelete(ObjPermRequiredMixin, DeleteView):
     permission_required = 'dictionary.delete_word'
     model = Word
+
+
+class DeriverCreate(ModelPermRequiredMixin, CreateView):
+    permission_required = 'dictionary.add_deriver'
+    model = Deriver
+    form_class = DeriverForm
+    template_name = 'deriver/edit.html'
 
 
 class DeriverDetail(DetailView):
