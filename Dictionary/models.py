@@ -1,8 +1,7 @@
-from ArabicTools.utils import transcribe, strip_diacritics
+from ArabicTools.utils import transcribe, strip_diacritics, apply, template_to_form
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Model, ForeignKey, CharField, TextField
-import re
-from ArabicTools.constants import POS_CHOICES, ABJAD, ARABIZI, SHADDA, DEFAULT_ROOT_ID
+from ArabicTools.constants import POS_CHOICES, ARABIZI, SHADDA
 
 
 class Word(Model):
@@ -50,21 +49,20 @@ class Word(Model):
 class Deriver(Model):
     origin_pos = CharField(choices=POS_CHOICES, max_length=15)
     result_pos = CharField(choices=POS_CHOICES, max_length=15)
-    expectation = CharField(default=(('([%s])' % ABJAD) * 3), max_length=255)
-    template = CharField(max_length=255)
+    origin_form = CharField(default='xxx', max_length=255)
+    result_form = CharField(max_length=255)
     name = CharField(max_length=63, blank=True)
 
-    def get_expectation_display(self):
-        return self.expectation
+    def get_origin_form_display(self):
+        return template_to_form(self.origin_form)
 
-    def get_template_display(self):
-        default_root = Word.objects.get(id=DEFAULT_ROOT_ID)
-        return self.apply_spelling(default_root)
+    def get_result_form_display(self):
+        return template_to_form(self.result_form)
 
-    def apply_spelling(self, word_in):
-        if type(word_in) is not Word:
-            raise TypeError('Type of ''word_in'' must be ''dictionary.Word''')
-        return re.match(self.expectation, word_in.spelling).expand(self.template)
+    def apply_spelling(self, word):
+        if type(word) is not Word:
+            raise TypeError('Type of ''word'' must be ''str''')
+        return apply(word.get_root().spelling)
 
     def apply(self, stem):
         return Word(spelling=self.apply_spelling(stem), pos=self.result_pos, stem=stem, pattern=self)
@@ -77,8 +75,11 @@ class Deriver(Model):
     def get_update_url(self):
         pass
 
+    def get_detail_url(self):
+        return reverse_lazy('dictionary:deriver.detail', kwargs={'pk': self.pk})
+
     def get_absolute_url(self):
-        pass
+        return self.get_detail_url()
 
     def __str__(self):
         return self.name
