@@ -2,10 +2,11 @@ from ArabicTools.utils import transcribe, strip_diacritics, apply
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Model, ForeignKey, CharField, TextField
 from ArabicTools.constants import POS_CHOICES, ARABIZI, SHADDA, ABJAD
+from django.utils.translation import ugettext_lazy as trans
 
 
 class Word(Model):
-    pos = CharField(choices=POS_CHOICES, max_length=15)
+    pos = CharField(trans('Part of Speech'), choices=POS_CHOICES, max_length=15)
     spelling = CharField(max_length=255)
     definition = TextField()
     examples = TextField(blank=True)
