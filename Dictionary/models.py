@@ -1,7 +1,7 @@
-from ArabicTools.utils import transcribe, strip_diacritics, apply, template_to_form
+from ArabicTools.utils import transcribe, strip_diacritics, apply
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Model, ForeignKey, CharField, TextField
-from ArabicTools.constants import POS_CHOICES, ARABIZI, SHADDA
+from ArabicTools.constants import POS_CHOICES, ARABIZI, SHADDA, ABJAD
 
 
 class Word(Model):
@@ -49,27 +49,25 @@ class Word(Model):
 class Deriver(Model):
     origin_pos = CharField(choices=POS_CHOICES, max_length=15)
     result_pos = CharField(choices=POS_CHOICES, max_length=15)
-    origin_form = CharField(default='xxx', max_length=255)
+    origin_form = CharField(default=('([%s])' % ABJAD) * 3, max_length=255)
     result_form = CharField(max_length=255)
     name = CharField(max_length=63, blank=True)
 
     def get_origin_form_display(self):
-        return template_to_form(self.origin_form)
+        return self.origin_form
 
     def get_result_form_display(self):
-        return template_to_form(self.result_form)
+        return self.result_form
 
     def apply_spelling(self, word):
         if type(word) is not Word:
-            raise TypeError('Type of ''word'' must be ''str''')
-        return apply(word.get_root().spelling)
+            raise TypeError('Type of argument ''word'' must be ''Word''')
+        return apply(self.origin_form, word.spelling, self.result_form)
 
-    def apply(self, stem):
-        return Word(spelling=self.apply_spelling(stem), pos=self.result_pos, stem=stem, pattern=self)
-
-    def apply_and_save(self, stem):
-        result = self.apply(stem)
-        result.save()
+    def apply(self, stem, save=False):
+        result = Word(spelling=self.apply_spelling(stem), pos=self.result_pos, stem=stem, pattern=self)
+        if save:
+            result.save()
         return result
 
     def get_update_url(self):

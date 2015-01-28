@@ -1,57 +1,22 @@
-from copy import copy
-from ArabicTools.constants import TASHKEEL, DIACRITICS, SHADDA, DEFAULT_ROOT
+from ArabicTools.constants import DIACRITICS, SHADDA, DEFAULT_ROOT
+import re
+from ArabicTools.regex import LETTER
 
 
-def form_to_template(form, root=DEFAULT_ROOT):
-    template = ''
-    counter = 0
-    for letter in form:
-        if letter == form[counter]:
-            template += 'x'
-        else:
-            template += letter
-    return template
+def apply(origin_form, word, result_form):
+    return re.match(origin_form, word).expand(result_form)
 
 
-def template_to_form(template, root=DEFAULT_ROOT):
-    form = ''
-    counter = 0
-    for letter in template:
-        if letter == 'x':
-            form += root[counter]
-            counter += 1
-        else:
-            form += letter
-    return form
-
-
-def extracter(word, form):
-    if len(word) == len(form):
-        iterations = len(word)
-    word_copy = copy(word)
-    for i in range(len(word)):
-        pass
-
-
-def apply(root_spelling, template):
-    result = ''
-    counter = 0
-    for letter in template:
-        if letter == 'x':
-            result += root_spelling[counter]
-            counter += 1
-        else:
-            result += letter
-    return result
-
-
-def spelling_to_template(word, root=('ف', 'ع', 'ل')):
-    word = str(word)
-    if ' ' in word or type(word) != str:
-        raise ValueError()
-    for i, j in enumerate(root):
-        word.replace(j, ('\\%s' % i))
-    return word
+def pattern_to_form(pattern):  # FIXME: This is fucking hideous
+    pattern_ = list(pattern)
+    default_root = list(DEFAULT_ROOT)
+    for i in range(len(pattern_)):
+        if (i+len(LETTER) <= len(pattern_)) and (''.join(pattern_[i:i+len(LETTER)]) == LETTER):
+            pattern_[i] = default_root.pop(0)
+            for j in range(i+1, i+len(LETTER)):
+                pattern_.pop(i+1)
+    pattern_ = ''.join(pattern_)
+    return pattern_
 
 
 def transcribe(spelling, code):
