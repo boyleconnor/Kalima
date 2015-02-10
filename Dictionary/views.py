@@ -56,7 +56,7 @@ class DeriverDetail(DetailView):
 
 
 class DeriverUpdate(ObjPermRequiredMixin, UpdateView):
-    permission_required = 'dictionary.edit_deriver'
+    permission_required = 'dictionary.change_deriver'
     model = Deriver
     form_class = DeriverForm
     template_name = 'deriver/edit.html'
