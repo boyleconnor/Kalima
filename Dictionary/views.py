@@ -53,3 +53,10 @@ class DeriverCreate(ModelPermRequiredMixin, CreateView):
 class DeriverDetail(DetailView):
     model = Deriver
     template_name = 'deriver/detail.html'
+
+
+class DeriverUpdate(ObjPermRequiredMixin, UpdateView):
+    permission_required = 'dictionary.edit_deriver'
+    model = Deriver
+    form_class = DeriverForm
+    template_name = 'deriver/edit.html'
