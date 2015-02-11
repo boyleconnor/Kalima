@@ -1,7 +1,8 @@
-from ArabicTools.utils import transcribe, strip_diacritics, apply
+from ArabicTools.regex import LETTER
+from ArabicTools.utils import transcribe, strip_diacritics, apply, pattern_to_form
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Model, ForeignKey, CharField, TextField
-from ArabicTools.constants import POS_CHOICES, ARABIZI, SHADDA, ABJAD
+from ArabicTools.constants import POS_CHOICES, ARABIZI, SHADDA, ABJAD, DEFAULT_ROOT
 from django.utils.translation import ugettext_lazy as trans
 
 
@@ -55,9 +56,11 @@ class Deriver(Model):
     name = CharField(max_length=63, blank=True)
 
     def get_origin_form_display(self):
-        return self.origin_form
+        return pattern_to_form(self.origin_form)
 
     def get_result_form_display(self):
+        if self.origin_pos == 'root':
+            return self.apply_spelling(Word(spelling=DEFAULT_ROOT))
         return self.result_form
 
     def apply_spelling(self, word):
