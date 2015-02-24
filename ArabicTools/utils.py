@@ -4,7 +4,10 @@ from ArabicTools.regex import LETTER
 
 
 def apply(origin_form, word, result_form):
-    return re.match(origin_form, word).expand(result_form)
+    try:
+        return re.match(origin_form, word).expand(result_form)
+    except AttributeError:
+        raise ValueError('word did not match origin_form')
 
 
 def pattern_to_form(pattern):  # FIXME: This will break for patterns expecting more than three letters
