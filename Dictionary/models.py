@@ -77,6 +77,9 @@ class Deriver(Model):
     def get_update_url(self):
         pass
 
+    def get_apply_url(self):
+        return reverse_lazy('dictionary:deriver.apply', kwargs={'pk': self.pk})
+
     def get_detail_url(self):
         return reverse_lazy('dictionary:deriver.detail', kwargs={'pk': self.pk})
 

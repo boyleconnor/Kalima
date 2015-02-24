@@ -1,7 +1,7 @@
 from Dictionary.forms import WordSearchForm
 from django.conf.urls import patterns, include, url
 from Dictionary.views import WordCreate, WordDetail, WordUpdate, WordDelete, Home, WordSearch, DeriverDetail, \
-    DeriverCreate, DeriverUpdate
+    DeriverCreate, DeriverUpdate, DeriverApply
 from haystack.views import search_view_factory
 
 urlpatterns = patterns('',
@@ -13,5 +13,6 @@ urlpatterns = patterns('',
     url(r'deriver/add/', DeriverCreate.as_view(), name='deriver.create'),
     url(r'deriver/(?P<pk>\d+)/$', DeriverDetail.as_view(), name='deriver.detail'),
     url(r'deriver/(?P<pk>\d+)/edit/$', DeriverUpdate.as_view(), name='deriver.update'),
+    url(r'deriver/(?P<pk>\d+)/apply/$', DeriverApply.as_view(), name='deriver.apply'),
     url(r'$', Home.as_view(), name='home'),
 )
