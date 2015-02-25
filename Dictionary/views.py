@@ -43,7 +43,9 @@ class WordUpdate(ObjPermRequiredMixin, UpdateView):
 
 class WordDelete(ObjPermRequiredMixin, DeleteView):
     permission_required = 'dictionary.delete_word'
+    template_name = 'word/delete.html'
     model = Word
+    success_url = reverse_lazy('dictionary:home')
 
 
 class DeriverCreate(ModelPermRequiredMixin, CreateView):
@@ -63,6 +65,12 @@ class DeriverUpdate(ObjPermRequiredMixin, UpdateView):
     model = Deriver
     form_class = DeriverForm
     template_name = 'deriver/edit.html'
+
+
+class DeriverDelete(ObjPermRequiredMixin, DeleteView):
+    permission_required = 'dictionary.delete_deriver'
+    model = Deriver
+    template_name = 'deriver/delete.html'
 
 
 class DeriverApply(ModelPermRequiredMixin, FormView):
