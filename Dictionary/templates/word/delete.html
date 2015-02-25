@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Deleting word ' %}{{ word }}{% endblock %}
+
+{% block content %}
+    <p>{% trans 'Are you sure you want to delete ' %}{{ word }}{% trans '?' %}</p>
+    <form method="post">
+        <input type="submit" value="{% trans 'Confirm' %}">
+        {% csrf_token %}
+    </form>
+{% endblock %}
