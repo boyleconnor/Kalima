@@ -26,6 +26,12 @@
                 <td><a href="{{ word.stem.get_detail_url }}">{{ word.stem }}</a></td>
             </tr>
         {% endif %}
+        {% if word.pattern %}
+            <tr>
+                <td colspan="2">{% trans "Pattern" %}</td>
+                <td><a href="{{ word.pattern.get_detail_url }}">{{ word.pattern }}</a></td>
+            </tr>
+        {% endif %}
         <tr>
             <td colspan="2">{% trans "Definition" %}</td>
             <td>{{ word.definition }}</td>
