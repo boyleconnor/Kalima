@@ -71,6 +71,7 @@ class DeriverDelete(ObjPermRequiredMixin, DeleteView):
     permission_required = 'dictionary.delete_deriver'
     model = Deriver
     template_name = 'deriver/delete.html'
+    success_url = reverse_lazy('dictionary:home')
 
 
 class DeriverApply(ModelPermRequiredMixin, FormView):
