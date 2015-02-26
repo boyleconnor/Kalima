@@ -58,10 +58,16 @@ class Deriver(Model):
     def get_origin_form_display(self):
         return pattern_to_form(self.origin_form)
 
+    def get_origin_form_arabizi_display(self):
+        return transcribe(self.get_origin_form_display(), ARABIZI)
+
     def get_result_form_display(self):
         if self.origin_pos == 'root':
             return self.apply_spelling(Word(spelling=DEFAULT_ROOT))
         return self.result_form
+
+    def get_result_form_arabizi_display(self):
+        return transcribe(self.get_result_form_display(), ARABIZI)
 
     def apply_spelling(self, word):
         if type(word) is not Word:
