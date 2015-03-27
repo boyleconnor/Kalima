@@ -1,5 +1,5 @@
-from Dictionary.forms import WordSearchForm
+from Dictionary.forms import SearchForm
 
 
 def search(request):
-    return {'search_form': WordSearchForm}
+    return {'search_form': SearchForm}

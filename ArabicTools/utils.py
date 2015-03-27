@@ -1,4 +1,4 @@
-from ArabicTools.constants import DIACRITICS, SHADDA, DEFAULT_ROOT
+from ArabicTools.constants import DIACRITICS, SHADDA, DEFAULT_ROOT_SPELLING
 import re
 from ArabicTools.regex import LETTER
 
@@ -13,7 +13,7 @@ def apply(origin_form, word, result_form):
 def pattern_to_form(pattern):  # FIXME: This will break for patterns expecting more than three letters
     pattern = pattern.replace(LETTER, 'x')
     form = ''
-    default_root = list(DEFAULT_ROOT)
+    default_root = list(DEFAULT_ROOT_SPELLING)
     for letter in pattern:
         if letter == 'x':
             form += default_root.pop(0)

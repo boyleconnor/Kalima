@@ -1,6 +1,6 @@
 ROOT_LENGTHS = (3, 4)
 
-DEFAULT_ROOT = 'فعل'
+DEFAULT_ROOT_SPELLING = 'فعل'
 
 FATHA = 'َ'
 
@@ -88,7 +88,7 @@ ALIF_MAQSURA = 'ى'
 
 VOWELS = ALIF + WAW + YAA + ALIF_MAQSURA
 
-CONSONANTS = BAA + TAA + THAA + JIM + HHAA + XAA + DAL + DHAL + RAA + ZAYN + SIN + SHIN + SAD + DAD + TTAA + ZZAA + EIN + GHAIN + FAA + QAF + KAF + LAM + MIM + NUN + HAA + HAMZA
+CONSONANTS = BAA + TAA + THAA + JIM + HHAA + XAA + DAL + DHAL + RAA + ZAYN + SIN + SHIN + SAD + DAD + TTAA + ZZAA + EIN + GHAIN + FAA + QAF + KAF + LAM + MIM + NUN + HAA + HAMZA + TAA_MARBUTA
 
 ABJAD = VOWELS + CONSONANTS
 
@@ -100,6 +100,42 @@ POS_CHOICES = (
     ('adjective', 'Adjective'),
     ('preposition', 'Preposition'),
     ('root', 'Root')
+)
+
+CASE_CHOICES = (
+    ('nominative', 'Nominative'),
+    ('genitive', 'Genitive'),
+    ('accusative', 'Accusative')
+)
+
+GENDER_CHOICES = (
+    ('masculine', 'Masculine'),
+    ('feminine', 'Feminine')
+)
+
+NUMBER_CHOICES = (
+    ('singular', 'Singular'),
+    ('dual', 'Dual'),
+    ('plural', 'Plural')
+)
+
+STATE_CHOICES = (
+    ('construct', 'Construct'),
+    ('definite', 'Definite'),
+    ('indefinite', 'Indefinite')
+)
+
+PERSON_CHOICES = (
+    ('first', 'First'),
+    ('second', 'Second'),
+    ('third', 'Third')
+)
+
+TENSE_CHOICES = (
+    ('perfect', 'Perfect'),
+    ('imperfect-marfuw3', 'Imperfect-Marfu3'),
+    ('imperfect-mansuwb', 'Imperfect-Mansuwb'),
+    ('imperfect-magzuwm', 'Imperfect-Magzuwm')
 )
 
 ARABIC_LANGUAGE_CODE = 'ar'
@@ -144,7 +180,7 @@ ARABIZI = {
     WAW: 'w',
     YAA: 'y',
     HAMZA: '2',
-    TAA_MARBUTA: 'h'
+    TAA_MARBUTA: 'h',
 }
 
 ARABISH = {}

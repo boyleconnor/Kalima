@@ -19,7 +19,7 @@ class Home(ListView):
 class WordSearch:
     @staticmethod
     def as_view():
-        return search_view_factory(view_class=SearchView, form_class=WordSearchForm, template='word/search.html')
+        return search_view_factory(view_class=SearchView, form_class=WordSearchForm, template='search.html')
 
 
 class WordCreate(ModelPermRequiredMixin, CreateView):
