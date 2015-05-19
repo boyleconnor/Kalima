@@ -1,4 +1,7 @@
-ROOT_LENGTHS = (3, 4)
+ROOT_LENGTH_CHOICES = (
+    (3, 'Three'),
+    (4, 'Four')
+)
 
 DEFAULT_ROOT_SPELLING = 'فعل'
 
@@ -133,9 +136,15 @@ PERSON_CHOICES = (
 
 TENSE_CHOICES = (
     ('perfect', 'Perfect'),
-    ('imperfect-marfuw3', 'Imperfect-Marfu3'),
-    ('imperfect-mansuwb', 'Imperfect-Mansuwb'),
-    ('imperfect-magzuwm', 'Imperfect-Magzuwm')
+    ('indicative-imperfect', 'Indicative-Imperfect'),
+    ('subjunctive-imperfect', 'Subjunctive-Imperfect'),
+    ('jussive-imperfect', 'Jussive-Imperfect'),
+    ('imperative', 'Imperative')
+)
+
+VOICE_CHOICES = (
+    ('active', 'Active'),
+    ('passive', 'Passive')
 )
 
 ARABIC_LANGUAGE_CODE = 'ar'

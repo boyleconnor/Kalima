@@ -1,5 +1,4 @@
 {{ object.spelling }}
 {{ object.get_arabizi }}
 {{ object.get_without_diacritics }}
-{{ object.get_key_spelling }}
 {{ object.definition }}

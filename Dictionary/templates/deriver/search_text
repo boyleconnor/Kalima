@@ -2,4 +2,3 @@
 {{ object.get_result_form.get_spelling_display }}
 {{ object.get_result_form.get_arabizi }}
 {{ object.get_result_form.get_without_diacritics }}
-{{ object.get_result_form.get_key_spelling }}
