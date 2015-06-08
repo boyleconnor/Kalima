@@ -12,7 +12,6 @@ class Word(Model):
     spelling = CharField(max_length=255)
     definition = TextField(trans('Definition'))
     examples = TextField(trans('Examples'), blank=True)
-    tags = TextField(blank=True)
     stem = ForeignKey('Word', blank=True, null=True, related_name='derivatives')
     pattern = ForeignKey('Deriver', blank=True, null=True, related_name='words')
 

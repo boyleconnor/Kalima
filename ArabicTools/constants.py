@@ -193,3 +193,258 @@ ARABIZI = {
 }
 
 ARABISH = {}
+
+VERB_AFIXES = {
+    'voice:active': {
+        'tense:perfect': {
+            'number:singular': {
+                'person:first': ('', SUKUN+TAA+DAMMA),
+                'person:second': {
+                    'gender:masculine': ('', SUKUN+TAA+FATHA),
+                    'gender:feminine': ('', SUKUN+TAA+KASRA)
+                },
+                'person:third': {
+                    'gender:masculine': ('', FATHA),
+                    'gender:feminine': ('', FATHA+TAA+SUKUN)
+                }
+            },
+            'number:dual': {
+                'person:second': ('', SUKUN+TAA+DAMMA+MIM+FATHA+ALIF),
+                'person:third': {
+                    'gender:masculine': ('', FATHA+ALIF),
+                    'gender:feminine': ('', FATHA+TAA+FATHA+ALIF)
+                }
+            },
+            'number:plural': {
+                'person:first': ('', NUN+FATHA+ALIF),
+                'person:second': {
+                    'gender:masculine': ('', SUKUN+TAA+DAMMA+MIM+SUKUN),
+                    'gender:feminine': ('', SUKUN+TAA+DAMMA+NUN+SHADDA+FATHA)
+                },
+                'person:third': {
+                    'gender:masculine': ('', DAMMA+WAW+ALIF),
+                    'gender:feminine': ('', SUKUN+TAA+DAMMA+NUN+SHADDA+FATHA)
+                }
+            }
+        },
+        'tense:indicative-imperfect': {
+            'number:singular': {
+                'person:first': ('أ', DAMMA),
+                'person:second': {
+                    'gender:masculine': (TAA, DAMMA),
+                    'gender:feminine': (TAA, KASRA+YAA+NUN+FATHA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, DAMMA),
+                    'gender:feminine': (TAA, DAMMA)
+                }
+            },
+            'number:dual': {
+                'person:second': (TAA, FATHA+ALIF+NUN+KASRA),
+                'person:third': {
+                    'gender:masculine': (YAA, FATHA+ALIF+NUN+KASRA),
+                    'gender:feminine': (TAA, FATHA+ALIF+NUN+KASRA)
+                }
+            },
+            'number:plural': {
+                'person:first': ('أ', NUN+FATHA+ALIF),
+                'person:second': {
+                    'gender:masculine': (TAA, DAMMA+WAW+NUN+FATHA),
+                    'gender:feminine': (TAA, SUKUN+NUN+FATHA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, DAMMA+WAW+NUN+FATHA),
+                    'gender:feminine': (YAA, SUKUN+NUN+FATHA)
+                }
+            }
+        },
+        'tense:subjunctive-imperfect': {
+            'number:singular': {
+                'person:first': ('أ', FATHA),
+                'person:second': {
+                    'gender:masculine': (TAA, FATHA),
+                    'gender:feminine': (TAA, KASRA+YAA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, FATHA),
+                    'gender:feminine': (TAA, FATHA)
+                }
+            },
+            'number:dual': {
+                'person:second': (TAA, FATHA+ALIF),
+                'person:third': {
+                    'gender:masculine': (YAA, FATHA+ALIF),
+                    'gender:feminine': (TAA, FATHA+ALIF)
+                }
+            },
+            'number:plural': {
+                'person:first': ('أ', NUN+FATHA+ALIF),
+                'person:second': {
+                    'gender:masculine': (TAA, DAMMA+WAW+ALIF),
+                    'gender:feminine': (TAA, SUKUN+NUN+FATHA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, DAMMA+WAW+ALIF),
+                    'gender:feminine': (YAA, SUKUN+NUN+FATHA)
+                }
+            }
+        },
+        'tense:jussive-imperfect': {
+            'number:singular': {
+                'person:first': ('أ', SUKUN),
+                'person:second': {
+                    'gender:masculine': (TAA, SUKUN),
+                    'gender:feminine': (TAA, KASRA+YAA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, SUKUN),
+                    'gender:feminine': (TAA, SUKUN)
+                }
+            },
+            'number:dual': {
+                'person:second': (TAA, FATHA+ALIF),
+                'person:third': {
+                    'gender:masculine': (YAA, FATHA+ALIF),
+                    'gender:feminine': (TAA, FATHA+ALIF)
+                }
+            },
+            'number:plural': {
+                'person:first': ('أ', NUN+FATHA+ALIF),
+                'person:second': {
+                    'gender:masculine': (TAA, DAMMA+WAW+ALIF),
+                    'gender:feminine': (TAA, SUKUN+NUN+FATHA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, DAMMA+WAW+ALIF),
+                    'gender:feminine': (YAA, SUKUN+NUN+FATHA)
+                }
+            }
+        },
+    },
+    'voice:passive': {
+        'tense:perfect': {
+            'number:singular': {
+                'person:first': ('', SUKUN+TAA+DAMMA),
+                'person:second': {
+                    'gender:masculine': ('', SUKUN+TAA+FATHA),
+                    'gender:feminine': ('', SUKUN+TAA+KASRA)
+                },
+                'person:third': {
+                    'gender:masculine': ('', FATHA),
+                    'gender:feminine': ('', FATHA+TAA+SUKUN)
+                }
+            },
+            'number:dual': {
+                'person:second': ('', SUKUN+TAA+DAMMA+MIM+FATHA+ALIF),
+                'person:third': {
+                    'gender:masculine': ('', FATHA+ALIF),
+                    'gender:feminine': ('', FATHA+TAA+FATHA+ALIF)
+                }
+            },
+            'number:plural': {
+                'person:first': ('', NUN+FATHA+ALIF),
+                'person:second': {
+                    'gender:masculine': ('', SUKUN+TAA+DAMMA+MIM+SUKUN),
+                    'gender:feminine': ('', SUKUN+TAA+DAMMA+NUN+SHADDA+FATHA)
+                },
+                'person:third': {
+                    'gender:masculine': ('', DAMMA+WAW+ALIF),
+                    'gender:feminine': ('', SUKUN+TAA+DAMMA+NUN+SHADDA+FATHA)
+                }
+            }
+        },
+        'tense:indicative-imperfect': {
+            'number:singular': {
+                'person:first': ('أ', DAMMA),
+                'person:second': {
+                    'gender:masculine': (TAA, DAMMA),
+                    'gender:feminine': (TAA, KASRA+YAA+NUN+FATHA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, DAMMA),
+                    'gender:feminine': (TAA, DAMMA)
+                }
+            },
+            'number:dual': {
+                'person:second': (TAA, FATHA+ALIF+NUN+KASRA),
+                'person:third': {
+                    'gender:masculine': (YAA, FATHA+ALIF+NUN+KASRA),
+                    'gender:feminine': (TAA, FATHA+ALIF+NUN+KASRA)
+                }
+            },
+            'number:plural': {
+                'person:first': ('أ', NUN+FATHA+ALIF),
+                'person:second': {
+                    'gender:masculine': (TAA, DAMMA+WAW+NUN+FATHA),
+                    'gender:feminine': (TAA, SUKUN+NUN+FATHA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, DAMMA+WAW+NUN+FATHA),
+                    'gender:feminine': (YAA, SUKUN+NUN+FATHA)
+                }
+            }
+        },
+        'tense:subjunctive-imperfect': {
+            'number:singular': {
+                'person:first': ('أ', FATHA),
+                'person:second': {
+                    'gender:masculine': (TAA, FATHA),
+                    'gender:feminine': (TAA, KASRA+YAA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, FATHA),
+                    'gender:feminine': (TAA, FATHA)
+                }
+            },
+            'number:dual': {
+                'person:second': (TAA, FATHA+ALIF),
+                'person:third': {
+                    'gender:masculine': (YAA, FATHA+ALIF),
+                    'gender:feminine': (TAA, FATHA+ALIF)
+                }
+            },
+            'number:plural': {
+                'person:first': ('أ', NUN+FATHA+ALIF),
+                'person:second': {
+                    'gender:masculine': (TAA, DAMMA+WAW+ALIF),
+                    'gender:feminine': (TAA, SUKUN+NUN+FATHA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, DAMMA+WAW+ALIF),
+                    'gender:feminine': (YAA, SUKUN+NUN+FATHA)
+                }
+            }
+        },
+        'tense:jussive-imperfect': {
+            'number:singular': {
+                'person:first': ('أ', SUKUN),
+                'person:second': {
+                    'gender:masculine': (TAA, SUKUN),
+                    'gender:feminine': (TAA, KASRA+YAA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, SUKUN),
+                    'gender:feminine': (TAA, SUKUN)
+                }
+            },
+            'number:dual': {
+                'person:second': (TAA, FATHA+ALIF),
+                'person:third': {
+                    'gender:masculine': (YAA, FATHA+ALIF),
+                    'gender:feminine': (TAA, FATHA+ALIF)
+                }
+            },
+            'number:plural': {
+                'person:first': ('أ', NUN+FATHA+ALIF),
+                'person:second': {
+                    'gender:masculine': (TAA, DAMMA+WAW+ALIF),
+                    'gender:feminine': (TAA, SUKUN+NUN+FATHA)
+                },
+                'person:third': {
+                    'gender:masculine': (YAA, DAMMA+WAW+ALIF),
+                    'gender:feminine': (YAA, SUKUN+NUN+FATHA)
+                }
+            }
+        },
+    }
+}

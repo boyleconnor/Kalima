@@ -26,6 +26,13 @@
             <td>{{ deriver.get_result_form_display }}</td>
         </tr>
     </table>
+    {% if deriver.result_pos == "verb" %}
+        {% include "deriver/inflecter_tables/verb_inflecters.html" with deriver=deriver %}
+    {% elif deriver.result_pos == "noun" %}
+        {% include "deriver/inflecter_tables/noun_inflecters.html" with deriver=deriver %}
+    {% elif deriver.result_pos == "adjective" %}
+        {% include "deriver/inflecter_tables/adjective_inflecters.html" with deriver=deriver %}
+    {% endif %}
     <div id="foot">
         <a href="{{ deriver.get_apply_url }}">{% trans 'Apply' %}</a>
         <a href="{{ deriver.get_update_url }}">{% trans 'Edit' %}</a>

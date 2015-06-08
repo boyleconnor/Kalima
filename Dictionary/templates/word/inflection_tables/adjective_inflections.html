@@ -1,0 +1,98 @@
+{% load i18n %}
+{% load inflections %}
+
+<table>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="2">{% trans "Indefinite" %}</td>
+        <td>{% trans "Nominative" %}</td>
+        <td>{% trans "Genitive" %}</td>
+        <td>{% trans "Accusative" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Singular" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td>{% get_inflection word case="nominative" state="indefinite" number="singular" gender="masculine" %}</td>
+        <td>{% get_inflection word case="genitive" state="indefinite" number="singular" gender="masculine" %}</td>
+        <td>{% get_inflection word case="accusative" state="indefinite" number="singular" gender="masculine" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflection word case="nominative" state="indefinite" number="singular" gender="feminine" %}</td>
+        <td>{% get_inflection word case="genitive" state="indefinite" number="singular" gender="feminine" %}</td>
+        <td>{% get_inflection word case="accusative" state="indefinite" number="singular" gender="feminine" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Dual" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td>{% get_inflection word case="nominative" state="indefinite" number="dual" gender="masculine" %}</td>
+        <td>{% get_inflection word case="genitive" state="indefinite" number="dual" gender="masculine" %}</td>
+        <td>{% get_inflection word case="accusative" state="indefinite" number="dual" gender="masculine" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflection word case="nominative" state="indefinite" number="dual" gender="feminine" %}</td>
+        <td>{% get_inflection word case="genitive" state="indefinite" number="dual" gender="feminine" %}</td>
+        <td>{% get_inflection word case="accusative" state="indefinite" number="dual" gender="feminine" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Plural" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td>{% get_inflection word case="nominative" state="indefinite" number="plural" gender="masculine" %}</td>
+        <td>{% get_inflection word case="genitive" state="indefinite" number="plural" gender="masculine" %}</td>
+        <td>{% get_inflection word case="accusative" state="indefinite" number="plural" gender="masculine" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflection word case="nominative" state="indefinite" number="plural" gender="feminine" %}</td>
+        <td>{% get_inflection word case="genitive" state="indefinite" number="plural" gender="feminine" %}</td>
+        <td>{% get_inflection word case="accusative" state="indefinite" number="plural" gender="feminine" %}</td>
+    </tr>
+    <tr>
+        <td colspan="2">{% trans "Definite" %}</td>
+        <td>{% trans "Nominative" %}</td>
+        <td>{% trans "Genitive" %}</td>
+        <td>{% trans "Accusative" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Singular" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td>{% get_inflection word case="nominative" state="definite" number="singular" gender="masculine" %}</td>
+        <td>{% get_inflection word case="genitive" state="definite" number="singular" gender="masculine" %}</td>
+        <td>{% get_inflection word case="accusative" state="definite" number="singular" gender="masculine" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflection word case="nominative" state="definite" number="singular" gender="feminine" %}</td>
+        <td>{% get_inflection word case="genitive" state="definite" number="singular" gender="feminine" %}</td>
+        <td>{% get_inflection word case="accusative" state="definite" number="singular" gender="feminine" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Dual" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td>{% get_inflection word case="nominative" state="definite" number="dual" gender="masculine" %}</td>
+        <td>{% get_inflection word case="genitive" state="definite" number="dual" gender="masculine" %}</td>
+        <td>{% get_inflection word case="accusative" state="definite" number="dual" gender="masculine" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflection word case="nominative" state="definite" number="dual" gender="feminine" %}</td>
+        <td>{% get_inflection word case="genitive" state="definite" number="dual" gender="feminine" %}</td>
+        <td>{% get_inflection word case="accusative" state="definite" number="dual" gender="feminine" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Plural" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td>{% get_inflection word case="nominative" state="definite" number="plural" gender="masculine" %}</td>
+        <td>{% get_inflection word case="genitive" state="definite" number="plural" gender="masculine" %}</td>
+        <td>{% get_inflection word case="accusative" state="definite" number="plural" gender="masculine" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflection word case="nominative" state="definite" number="plural" gender="feminine" %}</td>
+        <td>{% get_inflection word case="genitive" state="definite" number="plural" gender="feminine" %}</td>
+        <td>{% get_inflection word case="accusative" state="definite" number="plural" gender="feminine" %}</td>
+    </tr>
+</table>

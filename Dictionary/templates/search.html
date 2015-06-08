@@ -22,7 +22,13 @@
             <table>
                 <tr>
                     <th>
-                        <p>{% trans "Word" %}</p>
+                        <p>{% trans "Type" %}</p>
+                    </th>
+                    <th>
+                        <p>{% trans "Part of Speech" %}</p>
+                    </th>
+                    <th>
+                        <p>{% trans "Spelling" %}</p>
                     </th>
                     <th>
                         <p>{% trans "Definition" %}</p>
@@ -30,22 +36,34 @@
                 </tr>
                 {% for result in page.object_list %}
                     <tr>
-                        <td>
-                            <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.spelling }}</a></p>
-                        </td>
+                        {% if result.model_name == "word" %}
+                            <td>
+                                <p>{% trans "Word" %}</p>
+                            </td>
+                            <td>
+                                <p>{{ result.object.pos }}</p>
+                            </td>
+                            <td>
+                                <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.spelling }}</a></p>
+                            </td>
+                        {% elif result.model_name == "deriver" %}
+                            <td>
+                                <p>{% trans "Form" %}</p>
+                            </td>
+                            <td>
+                                <p>{{ result.object.result_pos }}</p>
+                            </td>
+                            <td>
+                                <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.get_result_form_display }}</a></p>
+                            </td>
+                        {% endif %}
+
                         <td>
                             {{ result.object.definition }}
                         </td>
                     </tr>
                 {% empty %}
-                    <tr>
-                        <td>
-                            <p>{% trans "None" %}</p>
-                        </td>
-                        <td>
-                            <p>{% trans "No results found." %}</p>
-                        </td>
-                    </tr>
+                    <p>{% trans "No results found." %}</p>
                 {% endfor %}
             </table>
 

@@ -2,17 +2,24 @@ from ArabicTools.constants import CASE_CHOICES, GENDER_CHOICES, STATE_CHOICES, N
     TENSE_CHOICES, VOICE_CHOICES
 from ArabicTools.utils import pattern_to_form, apply
 from Dictionary.models.Derivers import Deriver
-from Dictionary.models.Inflections import Inflection, NounDeclension, AdjectiveDeclension, Conjugation
+from Dictionary.models.Inflections import Inflection
 from django.db.models import Model, ForeignKey, CharField
 
 
 class Inflecter(Model):
     class Meta:
         app_label = 'Dictionary'
-    result_model = Inflection
     origin_pattern = ForeignKey(Deriver)
     origin_form = CharField(max_length=255)
     result_form = CharField(max_length=255)
+
+    case = CharField(max_length=20, choices=CASE_CHOICES, blank=True)
+    state = CharField(max_length=20, choices=STATE_CHOICES, blank=True)
+    number = CharField(max_length=20, choices=NUMBER_CHOICES, blank=True)
+    gender = CharField(max_length=20, choices=GENDER_CHOICES, blank=True)
+    person = CharField(max_length=20, choices=PERSON_CHOICES, blank=True)
+    tense = CharField(max_length=20, choices=TENSE_CHOICES, blank=True)
+    voice = CharField(max_length=20, choices=VOICE_CHOICES, blank=True)
 
     def get_origin_form_display(self):
         return pattern_to_form(self.origin_form)
@@ -27,31 +34,12 @@ class Inflecter(Model):
         return apply(self.origin_form, word.spelling, self.result_form)
 
     def apply(self, stem, save=False, **kwargs):
-        result = self.result_model(spelling=self.apply_spelling(stem), stem=stem, pattern=self, **kwargs)
+        result = Inflection(spelling=self.apply_spelling(stem), stem=stem, pattern=self, **kwargs)
+        for attribute in ('case', 'state', 'number', 'gender', 'person', 'tense', 'voice'):
+            setattr(result, attribute, getattr(self, attribute))
         if save:
             result.save()
         return result
 
-
-class NounDecliner(Inflecter):
-    result_model = NounDeclension
-    case = CharField(max_length=20, choices=CASE_CHOICES, blank=True)
-    number = CharField(max_length=20, choices=NUMBER_CHOICES, blank=True)
-    state = CharField(max_length=20, choices=STATE_CHOICES, blank=True)
-
-
-class AdjectiveDecliner(Inflecter):
-    result_model = AdjectiveDeclension
-    case = CharField(max_length=20, choices=CASE_CHOICES, blank=True)
-    number = CharField(max_length=20, choices=NUMBER_CHOICES, blank=True)
-    state = CharField(max_length=20, choices=STATE_CHOICES, blank=True)
-    gender = CharField(max_length=20, choices=GENDER_CHOICES, blank=True)
-
-
-class Conjugator(Inflecter):
-    result_model = Conjugation
-    number = CharField(max_length=20, choices=NUMBER_CHOICES, blank=True)
-    gender = CharField(max_length=20, choices=GENDER_CHOICES, blank=True)
-    person = CharField(max_length=20, choices=PERSON_CHOICES, blank=True)
-    tense = CharField(max_length=20, choices=TENSE_CHOICES, blank=True)
-    voice = CharField(max_length=20, choices=VOICE_CHOICES, blank=True)
+    def __str__(self):
+        return self.get_result_form_display()

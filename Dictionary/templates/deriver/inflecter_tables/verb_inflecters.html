@@ -1,0 +1,222 @@
+{% load i18n %}
+{% load inflections %}
+
+<table>
+    <tr>
+        <td colspan="2"></td>
+        <td colspan="8" align="center">{% trans "Active" %}</td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td colspan="3" align="center">{% trans "Singular" %}</td>
+        <td colspan="2" align="center">{% trans "Dual" %}</td>
+        <td colspan="3" align="center">{% trans "Plural" %}</td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td>{% trans "First Person" %}</td>
+        <td>{% trans "Second Person" %}</td>
+        <td>{% trans "Third Person" %}</td>
+        <td>{% trans "Second Person" %}</td>
+        <td>{% trans "Third Person" %}</td>
+        <td>{% trans "First Person" %}</td>
+        <td>{% trans "Second Person" %}</td>
+        <td>{% trans "Third Person" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Perfect" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="singular" person="first" tense="perfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="second" tense="perfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="third" tense="perfect" voice="active" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="dual" person="second" tense="perfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="masculine" person="third" tense="perfect" voice="active" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="plural" person="first" tense="perfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="second" tense="perfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="third" tense="perfect" voice="active" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="second" tense="perfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="third" tense="perfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="feminine" person="third" tense="perfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="second" tense="perfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="third" tense="perfect" voice="active" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Indicative-Imperfect" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="singular" person="first" tense="indicative-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="second" tense="indicative-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="third" tense="indicative-imperfect" voice="active" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="dual" person="second" tense="indicative-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="masculine" person="third" tense="indicative-imperfect" voice="active" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="plural" person="first" tense="indicative-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="second" tense="indicative-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="third" tense="indicative-imperfect" voice="active" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="second" tense="indicative-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="third" tense="indicative-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="feminine" person="third" tense="indicative-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="second" tense="indicative-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="third" tense="indicative-imperfect" voice="active" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Subjunctive-Imperfect" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="singular" person="first" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="second" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="third" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="dual" person="second" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="masculine" person="third" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="plural" person="first" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="second" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="third" tense="subjunctive-imperfect" voice="active" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="second" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="third" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="feminine" person="third" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="second" tense="subjunctive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="third" tense="subjunctive-imperfect" voice="active" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Jussive-Imperfect" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="singular" person="first" tense="jussive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="second" tense="jussive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="third" tense="jussive-imperfect" voice="active" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="dual" person="second" tense="jussive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="masculine" person="third" tense="jussive-imperfect" voice="active" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="plural" person="first" tense="jussive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="second" tense="jussive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="third" tense="jussive-imperfect" voice="active" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="second" tense="jussive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="third" tense="jussive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="feminine" person="third" tense="jussive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="second" tense="jussive-imperfect" voice="active" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="third" tense="jussive-imperfect" voice="active" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Imperative" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td rowspan="2"></td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="second" tense="imperative" voice="active" %}</td>
+        <td rowspan="2"></td>
+        <td rowspan="2">{% get_inflecter deriver number="dual" person="second" tense="imperative" voice="active" %}</td>
+        <td rowspan="2"></td>
+        <td rowspan="2"></td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="second" tense="imperative" voice="active" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="second" tense="imperative" voice="active" %}</td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td colspan="8" align="center">{% trans "Passive" %}</td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td colspan="3" align="center">{% trans "Singular" %}</td>
+        <td colspan="2" align="center">{% trans "Dual" %}</td>
+        <td colspan="3" align="center">{% trans "Plural" %}</td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td>{% trans "First Person" %}</td>
+        <td>{% trans "Second Person" %}</td>
+        <td>{% trans "Third Person" %}</td>
+        <td>{% trans "Second Person" %}</td>
+        <td>{% trans "Third Person" %}</td>
+        <td>{% trans "First Person" %}</td>
+        <td>{% trans "Second Person" %}</td>
+        <td>{% trans "Third Person" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Perfect" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="singular" person="first" tense="perfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="second" tense="perfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="third" tense="perfect" voice="passive" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="dual" person="second" tense="perfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="masculine" person="third" tense="perfect" voice="passive" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="plural" person="first" tense="perfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="second" tense="perfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="third" tense="perfect" voice="passive" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="second" tense="perfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="third" tense="perfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="feminine" person="third" tense="perfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="second" tense="perfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="third" tense="perfect" voice="passive" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Indicative-Imperfect" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="singular" person="first" tense="indicative-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="second" tense="indicative-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="third" tense="indicative-imperfect" voice="passive" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="dual" person="second" tense="indicative-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="masculine" person="third" tense="indicative-imperfect" voice="passive" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="plural" person="first" tense="indicative-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="second" tense="indicative-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="third" tense="indicative-imperfect" voice="passive" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="second" tense="indicative-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="third" tense="indicative-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="feminine" person="third" tense="indicative-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="second" tense="indicative-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="third" tense="indicative-imperfect" voice="passive" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Subjunctive-Imperfect" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="singular" person="first" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="second" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="third" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="dual" person="second" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="masculine" person="third" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="plural" person="first" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="second" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="third" tense="subjunctive-imperfect" voice="passive" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="second" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="third" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="feminine" person="third" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="second" tense="subjunctive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="third" tense="subjunctive-imperfect" voice="passive" %}</td>
+    </tr>
+    <tr>
+        <td rowspan="2">{% trans "Jussive-Imperfect" %}</td>
+        <td>{% trans "Masculine" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="singular" person="first" tense="jussive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="second" tense="jussive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="masculine" person="third" tense="jussive-imperfect" voice="passive" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="dual" person="second" tense="jussive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="masculine" person="third" tense="jussive-imperfect" voice="passive" %}</td>
+        <td rowspan="2">{% get_inflecter deriver number="plural" person="first" tense="jussive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="second" tense="jussive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="masculine" person="third" tense="jussive-imperfect" voice="passive" %}</td>
+    </tr>
+    <tr>
+        <td>{% trans "Feminine" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="second" tense="jussive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="singular" gender="feminine" person="third" tense="jussive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="dual" gender="feminine" person="third" tense="jussive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="second" tense="jussive-imperfect" voice="passive" %}</td>
+        <td>{% get_inflecter deriver number="plural" gender="feminine" person="third" tense="jussive-imperfect" voice="passive" %}</td>
+    </tr>
+</table>

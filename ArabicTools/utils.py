@@ -22,6 +22,10 @@ def pattern_to_form(pattern):  # FIXME: This will break for patterns expecting m
     return form
 
 
+def form_to_pattern(form, example='فعل'):
+    pass
+
+
 def transcribe(spelling, code):
     output = ''
     for letter in spelling:
@@ -39,3 +43,4 @@ def strip_diacritics(spelling, leave=[]):
         if (letter not in DIACRITICS) or (letter in leave):
             output += letter
     return output
+

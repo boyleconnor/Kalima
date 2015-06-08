@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load i18n %}
+{% load inflections %}
 
 {% block title %}{{ word }}{% endblock %}
 
@@ -8,35 +9,37 @@
     <h1>{{ word }}</h1>
     <table>
         <tr>
-            <td rowspan="2">{% trans 'Transcriptions' %}</td>
             <td>{% trans 'Arabizi' %}</td>
             <td>{{ word.get_arabizi }}</td>
         </tr>
         <tr>
-            <td>{% trans 'Arabish' %}</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="2">{% trans "Part of Speech" %}</td>
+            <td>{% trans "Part of Speech" %}</td>
             <td>{{ word.get_pos_display }}</td>
         </tr>
         {% if word.stem %}
             <tr>
-                <td colspan="2">{% trans "Stem" %}</td>
+                <td>{% trans "Stem" %}</td>
                 <td><a href="{{ word.stem.get_detail_url }}">{{ word.stem }}</a></td>
             </tr>
         {% endif %}
         {% if word.pattern %}
             <tr>
-                <td colspan="2">{% trans "Pattern" %}</td>
+                <td>{% trans "Pattern" %}</td>
                 <td><a href="{{ word.pattern.get_detail_url }}">{{ word.pattern }}</a></td>
             </tr>
         {% endif %}
         <tr>
-            <td colspan="2">{% trans "Definition" %}</td>
+            <td>{% trans "Definition" %}</td>
             <td>{{ word.definition }}</td>
         </tr>
     </table>
+    {% if word.pos == "verb" %}
+        {% include "word/inflection_tables/verb_inflections.html" with word=word %}
+    {% elif word.pos == "noun" %}
+        {% include "word/inflection_tables/noun_inflections.html" with word=word %}
+    {% elif word.pos == "adjective" %}
+        {% include "word/inflection_tables/adjective_inflections.html" with word=word %}
+    {% endif %}
     <div id="foot">
         <a href="{{ word.get_update_url }}">{% trans 'Edit' %}</a>
         <a href="{{ word.get_delete_url }}">{% trans 'Delete' %}</a>

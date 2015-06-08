@@ -14,7 +14,7 @@
         </tr>
         {% for word in words %}
             <tr>
-                <td><a href="{{ word.get_absolute_url }}">{{ word }}</a></td>
+                <td><a href="{{ word.get_absolute_url }}">{{ word.get_spelling_display }}</a></td>
                 <td>{{ word.get_pos_display }}</td>
                 <td>{{ word.definition|default:"<p><i>None</i></p>" }}</td>
             </tr>
