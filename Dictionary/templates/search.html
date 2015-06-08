@@ -44,7 +44,7 @@
                                 <p>{{ result.object.pos }}</p>
                             </td>
                             <td>
-                                <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.spelling }}</a></p>
+                                <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.get_spelling_display }}</a></p>
                             </td>
                         {% elif result.model_name == "deriver" %}
                             <td>

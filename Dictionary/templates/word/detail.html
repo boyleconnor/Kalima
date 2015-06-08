@@ -6,7 +6,7 @@
 {% block title %}{{ word }}{% endblock %}
 
 {% block content %}
-    <h1>{{ word }}</h1>
+    <h1>{{ word.get_spelling_display }}</h1>
     <table>
         <tr>
             <td>{% trans 'Arabizi' %}</td>
@@ -41,6 +41,9 @@
         {% include "word/inflection_tables/adjective_inflections.html" with word=word %}
     {% endif %}
     <div id="foot">
+        {% if word.pos in 'adjective noun verb' %}
+            <a href="{{ word.get_mass_inflect_url }}">{% trans 'Inflect' %}</a>
+        {% endif %}
         <a href="{{ word.get_update_url }}">{% trans 'Edit' %}</a>
         <a href="{{ word.get_delete_url }}">{% trans 'Delete' %}</a>
     </div>
