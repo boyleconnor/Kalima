@@ -30,6 +30,12 @@ class Word(Model):
     def get_without_diacritics(self):
         return strip_diacritics(self.spelling)
 
+    def get_spelling_display(self):
+        if self.pos == 'root':
+            return ' '.join(self.spelling)
+        else:
+            return self.spelling
+
     def get_update_url(self):
         return reverse_lazy('dictionary:word.update', kwargs={'pk': self.pk})
 
