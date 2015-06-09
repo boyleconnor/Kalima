@@ -8,7 +8,6 @@ from rest_framework.reverse import reverse_lazy
 class Deriver(Model):
     class Meta:
         app_label = 'Dictionary'
-    result_model = Word
     origin_pos = CharField(max_length=16, choices=POS_CHOICES)
     result_pos = CharField(max_length=16, choices=POS_CHOICES)
     origin_form = CharField(default=('([%s])' % ABJAD) * 3, max_length=255)
