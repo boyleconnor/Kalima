@@ -19,7 +19,7 @@
         {% if word.stem %}
             <tr>
                 <td>{% trans "Stem" %}</td>
-                <td><a href="{{ word.stem.get_detail_url }}">{{ word.stem }}</a></td>
+                <td><a href="{{ word.stem.get_detail_url }}">{{ word.stem.get_spelling_display }}</a></td>
             </tr>
         {% endif %}
         {% if word.pattern %}
