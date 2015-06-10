@@ -13,7 +13,7 @@ class Deriver(Model):
     origin_form = CharField(default=('([%s])' % ABJAD) * 3, max_length=255)
     result_form = CharField(max_length=255)
     origin_pattern = ForeignKey('self', blank=True, null=True, related_name='result_patterns')
-    example_stem = CharField(max_length=4, blank=True)
+    example_stem = ForeignKey(Word, blank=True, null=True)
     name = CharField(max_length=63, blank=True)
 
     def get_origin_form_display(self):
@@ -21,7 +21,7 @@ class Deriver(Model):
 
     def get_result_form(self):
         if self.example_stem:
-            return self.apply(Word(spelling=self.example_stem, pos=self.origin_pos))
+            return self.apply(self.example_stem)
         return self.apply(self.origin_pattern.get_result_form())
 
     def get_result_form_display(self):
