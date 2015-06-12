@@ -29,8 +29,11 @@ def form_to_pattern(form, example='فعل'):
 def transcribe(spelling, code):
     output = ''
     for letter in spelling:
-        new_letter = code[letter]
-        if new_letter == '-':
+        if letter in code:
+            new_letter = code[letter]
+        else:
+            new_letter = ' '
+        if new_letter == '-' and len(output) > 0:
             output += output[-1]
         else:
             output += new_letter
