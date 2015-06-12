@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from Dictionary.views import WordCreate, WordDetail, WordUpdate, WordDelete, Home, WordSearch, DeriverDetail, \
+from Dictionary.views.html import WordCreate, WordDetail, WordUpdate, WordDelete, Home, WordSearch, DeriverDetail, \
     DeriverCreate, DeriverUpdate, DeriverApply
 
 urlpatterns = patterns('',
@@ -12,6 +12,5 @@ urlpatterns = patterns('',
     url(r'^deriver/(?P<pk>\d+)/$', DeriverDetail.as_view(), name='deriver.detail'),
     url(r'^deriver/(?P<pk>\d+)/edit/$', DeriverUpdate.as_view(), name='deriver.update'),
     url(r'^deriver/(?P<pk>\d+)/apply/$', DeriverApply.as_view(), name='deriver.apply'),
-    url(r'^api/', include('Dictionary.urls.api', namespace='api')),
     url(r'^$', Home.as_view(), name='home'),
 )

@@ -1,1 +1,0 @@
-from Dictionary.views.html import *
