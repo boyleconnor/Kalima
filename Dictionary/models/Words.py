@@ -13,7 +13,7 @@ class Word(Model):
     definition = TextField(trans('Definition'))
     examples = TextField(trans('Examples'), blank=True)
     stem = ForeignKey('Word', blank=True, null=True, related_name='derivatives')
-    pattern = ForeignKey('Deriver', blank=True, null=True, related_name='words')
+    pattern = ForeignKey('Dictionary.Deriver', blank=True, null=True, related_name='words')
 
     def get_root(self):
         stem = self.stem
