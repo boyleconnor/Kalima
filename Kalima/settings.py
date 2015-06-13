@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'guardian',
     'rest_framework',
     'Dictionary',
+    'Inflections',
 )
 
 MIDDLEWARE_CLASSES = (

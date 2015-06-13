@@ -2,13 +2,28 @@ from ArabicTools.constants import CASE_CHOICES, GENDER_CHOICES, STATE_CHOICES, N
     TENSE_CHOICES, VOICE_CHOICES
 from ArabicTools.utils import pattern_to_form, apply
 from Dictionary.models.Derivers import Deriver
-from Dictionary.models.Inflections import Inflection
-from django.db.models import Model, ForeignKey, CharField
+from django.db.models import Model, ForeignKey, CharField, TextField
+
+
+class Inflection(Model):
+    stem = ForeignKey('Dictionary.Word')
+    pattern = ForeignKey('Inflections.Inflecter', blank=True, null=True)
+    spelling = CharField(max_length=250)
+    attributes = TextField()
+
+    case = CharField(max_length=20, choices=CASE_CHOICES, blank=True)
+    state = CharField(max_length=20, choices=STATE_CHOICES, blank=True)
+    number = CharField(max_length=20, choices=NUMBER_CHOICES, blank=True)
+    gender = CharField(max_length=20, choices=GENDER_CHOICES, blank=True)
+    person = CharField(max_length=20, choices=PERSON_CHOICES, blank=True)
+    tense = CharField(max_length=20, choices=TENSE_CHOICES, blank=True)
+    voice = CharField(max_length=20, choices=VOICE_CHOICES, blank=True)
+
+    def __str__(self):
+        return self.spelling
 
 
 class Inflecter(Model):
-    class Meta:
-        app_label = 'Dictionary'
     origin_pattern = ForeignKey(Deriver)
     origin_form = CharField(max_length=255)
     result_form = CharField(max_length=255)

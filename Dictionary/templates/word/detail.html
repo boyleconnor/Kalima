@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load inflections %}
 
 {% block title %}{{ word }}{% endblock %}
 
@@ -33,13 +32,6 @@
             <td>{{ word.definition }}</td>
         </tr>
     </table>
-    {% if word.pos == "verb" %}
-        {% include "word/inflection_tables/verb_inflections.html" with word=word %}
-    {% elif word.pos == "noun" %}
-        {% include "word/inflection_tables/noun_inflections.html" with word=word %}
-    {% elif word.pos == "adjective" %}
-        {% include "word/inflection_tables/adjective_inflections.html" with word=word %}
-    {% endif %}
     <div id="foot">
         {% if word.pos in 'adjective noun verb' %}
             <a href="{{ word.get_mass_inflect_url }}">{% trans 'Inflect' %}</a>
