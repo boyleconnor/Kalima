@@ -19,7 +19,7 @@ class Word(Model):
         stem = self.stem
         if stem is None:
             return None
-        elif type(stem) == Root:
+        elif stem.pos == 'root':
             return stem
         else:
             return stem.get_root()
@@ -50,24 +50,3 @@ class Word(Model):
 
     def __str__(self):
         return self.spelling
-
-
-class Root(Word):
-    length = SmallIntegerField(choices=ROOT_LENGTH_CHOICES)
-
-
-class Noun(Word):
-    gender = CharField(max_length=20, choices=GENDER_CHOICES)
-    human = BooleanField(default=False)
-
-
-class Adjective(Word):
-    noun = ManyToManyField(Noun)
-
-
-class Adverb(Word):
-    pass
-
-
-class Verb(Word):
-    noun = ManyToManyField(Noun)
