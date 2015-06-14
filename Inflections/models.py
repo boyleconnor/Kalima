@@ -1,7 +1,7 @@
 from ArabicTools.constants import CASE_CHOICES, GENDER_CHOICES, STATE_CHOICES, NUMBER_CHOICES, PERSON_CHOICES, \
     TENSE_CHOICES, VOICE_CHOICES
 from ArabicTools.utils import pattern_to_form, apply
-from Dictionary.models.Derivers import Deriver
+from Dictionary.models.Patterns import Pattern
 from django.db.models import Model, ForeignKey, CharField, TextField
 
 
@@ -24,7 +24,7 @@ class Inflection(Model):
 
 
 class Inflecter(Model):
-    origin_pattern = ForeignKey(Deriver)
+    origin_pattern = ForeignKey(Pattern)
     origin_form = CharField(max_length=255)
     result_form = CharField(max_length=255)
 

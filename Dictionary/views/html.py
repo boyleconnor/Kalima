@@ -1,10 +1,10 @@
-from Dictionary.forms import WordSearchForm, WordForm, DeriverForm, DeriverApplyForm
+from Dictionary.forms import WordSearchForm, WordForm, PatternForm, PatternApplyForm
 from Utils.mixins import ModelPermRequiredMixin, ObjPermRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.views.generic.edit import FormView
-from Dictionary.models import Word, Deriver
+from Dictionary.models import Word, Pattern
 from haystack.views import SearchView, search_view_factory
 
 
@@ -48,54 +48,54 @@ class WordDelete(ObjPermRequiredMixin, DeleteView):
     success_url = reverse_lazy('dictionary:home')
 
 
-class DeriverCreate(ModelPermRequiredMixin, CreateView):
-    permission_required = 'dictionary.add_deriver'
-    model = Deriver
-    form_class = DeriverForm
-    template_name = 'deriver/edit.html'
+class PatternCreate(ModelPermRequiredMixin, CreateView):
+    permission_required = 'dictionary.add_pattern'
+    model = Pattern
+    form_class = PatternForm
+    template_name = 'pattern/edit.html'
 
 
-class DeriverDetail(DetailView):
-    model = Deriver
-    template_name = 'deriver/detail.html'
+class PatternDetail(DetailView):
+    model = Pattern
+    template_name = 'pattern/detail.html'
 
 
-class DeriverUpdate(ObjPermRequiredMixin, UpdateView):
-    permission_required = 'dictionary.change_deriver'
-    model = Deriver
-    form_class = DeriverForm
-    template_name = 'deriver/edit.html'
+class PatternUpdate(ObjPermRequiredMixin, UpdateView):
+    permission_required = 'dictionary.change_pattern'
+    model = Pattern
+    form_class = PatternForm
+    template_name = 'pattern/edit.html'
 
 
-class DeriverDelete(ObjPermRequiredMixin, DeleteView):
-    permission_required = 'dictionary.delete_deriver'
-    model = Deriver
-    template_name = 'deriver/delete.html'
+class PatternDelete(ObjPermRequiredMixin, DeleteView):
+    permission_required = 'dictionary.delete_pattern'
+    model = Pattern
+    template_name = 'pattern/delete.html'
     success_url = reverse_lazy('dictionary:home')
 
 
-class DeriverApply(ModelPermRequiredMixin, FormView):
-    form_class = DeriverApplyForm
-    template_name = 'deriver/apply.html'
+class PatternApply(ModelPermRequiredMixin, FormView):
+    form_class = PatternApplyForm
+    template_name = 'pattern/apply.html'
 
     def dispatch(self, request, *args, **kwargs):
-        self.deriver = get_object_or_404(Deriver, id=kwargs.pop('pk'))
-        return super(DeriverApply, self).dispatch(request, *args, **kwargs)
+        self.pattern = get_object_or_404(Pattern, id=kwargs.pop('pk'))
+        return super(PatternApply, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return self.object.get_update_url()
 
     def get_form(self, form_class):
-        form = super(DeriverApply, self).get_form(form_class)
-        form.initial['deriver'] = self.deriver
-        form.fields['stem'].queryset = Word.objects.filter(pos=self.deriver.origin_pos)
+        form = super(PatternApply, self).get_form(form_class)
+        form.initial['pattern'] = self.pattern
+        form.fields['stem'].queryset = Word.objects.filter(pos=self.pattern.origin_pos)
         return form
 
     def get_context_data(self, **kwargs):
-        context_data = super(DeriverApply, self).get_context_data(**kwargs)
-        context_data['deriver'] = self.deriver
+        context_data = super(PatternApply, self).get_context_data(**kwargs)
+        context_data['pattern'] = self.pattern
         return context_data
 
     def form_valid(self, form):
-        self.object = form.apply(self.deriver)
-        return super(DeriverApply, self).form_valid(form)
+        self.object = form.apply(self.pattern)
+        return super(PatternApply, self).form_valid(form)

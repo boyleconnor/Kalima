@@ -2,10 +2,10 @@
 
 {% load i18n %}
 
-{% block title %}{% trans 'Deleting deriver ' %}{{ deriver }}{% endblock %}
+{% block title %}{% trans 'Deleting pattern ' %}{{ pattern }}{% endblock %}
 
 {% block content %}
-    <p>{% trans 'Are you sure you want to delete ' %}{{ deriver }}{% trans '?' %}</p>
+    <p>{% trans 'Are you sure you want to delete ' %}{{ pattern }}{% trans '?' %}</p>
     <form method="post">
         <input type="submit" value="{% trans 'Confirm' %}">
         {% csrf_token %}

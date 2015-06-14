@@ -12,7 +12,7 @@
         <a href="{% url 'account_login' %}">{% trans 'Log In' %}</a>
     {% endif %}
     <a href="{% url 'dictionary:word.create' %}">{% trans 'Add Word' %}</a>
-    <a href="{% url 'dictionary:deriver.create' %}">{% trans 'Add Deriver' %}</a>
+    <a href="{% url 'dictionary:pattern.create' %}">{% trans 'Add Pattern' %}</a>
     <form action="{% url 'dictionary:word.search' %}" method="get">
         {{ search_form.as_p }}
         <input type="submit" value="{% trans 'Search' %}">

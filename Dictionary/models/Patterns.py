@@ -5,7 +5,7 @@ from django.db.models import Model, CharField, ForeignKey
 from rest_framework.reverse import reverse_lazy
 
 
-class Deriver(Model):
+class Pattern(Model):
     class Meta:
         app_label = 'Dictionary'
     origin_pos = CharField(max_length=16, choices=POS_CHOICES)
@@ -13,7 +13,7 @@ class Deriver(Model):
     origin_form = CharField(default=('([%s])' % ABJAD) * 3, max_length=255)
     result_form = CharField(max_length=255)
     origin_pattern = ForeignKey('self', blank=True, null=True, related_name='result_patterns')
-    example_stem = ForeignKey(Word, blank=True, null=True)
+    example_stem = ForeignKey(Word, blank=True, null=True, related_name='example_in')
     name = CharField(max_length=63, blank=True)
 
     def get_origin_form_display(self):
@@ -22,10 +22,10 @@ class Deriver(Model):
     def get_result_form(self):
         if self.example_stem:
             return self.apply(self.example_stem)
-        return self.apply(self.origin_pattern.get_result_form())
-
-    def get_result_form_display(self):
-        return self.get_result_form().spelling
+        if self.origin_pattern:
+            return self.apply(self.origin_pattern.get_result_form())
+        else:
+            return None
 
     def apply_spelling(self, word):
         return apply(self.origin_form, word.spelling, self.result_form)
@@ -37,16 +37,16 @@ class Deriver(Model):
         return result
 
     def get_update_url(self):
-        return reverse_lazy('dictionary:deriver.update', kwargs={'pk': self.pk})
+        return reverse_lazy('dictionary:pattern.update', kwargs={'pk': self.pk})
 
     def get_apply_url(self):
-        return reverse_lazy('dictionary:deriver.apply', kwargs={'pk': self.pk})
+        return reverse_lazy('dictionary:pattern.apply', kwargs={'pk': self.pk})
 
     def get_detail_url(self):
-        return reverse_lazy('dictionary:deriver.detail', kwargs={'pk': self.pk})
+        return reverse_lazy('dictionary:pattern.detail', kwargs={'pk': self.pk})
 
     def get_absolute_url(self):
         return self.get_detail_url()
 
     def __str__(self):
-        return '%s (%s)' % (self.name, self.get_result_form_display())
+        return '%s (%s)' % (self.name, self.get_result_form()) if self.get_result_form() else self.name

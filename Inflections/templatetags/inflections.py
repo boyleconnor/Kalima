@@ -15,8 +15,8 @@ def get_inflection(word, **attributes):
 
 
 @register.simple_tag
-def get_inflecter(deriver, **attributes):
-    inflecters = [inflecter.get_result_form() for inflecter in deriver.inflecter_set.filter(**attributes)]
+def get_inflecter(pattern, **attributes):
+    inflecters = [inflecter.get_result_form() for inflecter in pattern.inflecter_set.filter(**attributes)]
     if len(inflecters) == 1:
         return inflecters[0]
     elif len(inflecters) > 1:

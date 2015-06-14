@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
-from Dictionary.views.html import WordCreate, WordDetail, WordUpdate, WordDelete, Home, WordSearch, DeriverDetail, \
-    DeriverCreate, DeriverUpdate, DeriverApply
+from Dictionary.views.html import WordCreate, WordDetail, WordUpdate, WordDelete, Home, WordSearch, PatternDetail, \
+    PatternCreate, PatternUpdate, PatternApply
 
 urlpatterns = patterns('',
     url(r'^search/$', WordSearch.as_view(), name='word.search'),
@@ -8,9 +8,9 @@ urlpatterns = patterns('',
     url(r'^word/(?P<pk>\d+)/$', WordDetail.as_view(), name='word.detail'),
     url(r'^word/(?P<pk>\d+)/edit/$', WordUpdate.as_view(), name='word.update'),
     url(r'^word/(?P<pk>\d+)/delete/$', WordDelete.as_view(), name='word.delete'),
-    url(r'^deriver/add/', DeriverCreate.as_view(), name='deriver.create'),
-    url(r'^deriver/(?P<pk>\d+)/$', DeriverDetail.as_view(), name='deriver.detail'),
-    url(r'^deriver/(?P<pk>\d+)/edit/$', DeriverUpdate.as_view(), name='deriver.update'),
-    url(r'^deriver/(?P<pk>\d+)/apply/$', DeriverApply.as_view(), name='deriver.apply'),
+    url(r'^pattern/add/', PatternCreate.as_view(), name='pattern.create'),
+    url(r'^pattern/(?P<pk>\d+)/$', PatternDetail.as_view(), name='pattern.detail'),
+    url(r'^pattern/(?P<pk>\d+)/edit/$', PatternUpdate.as_view(), name='pattern.update'),
+    url(r'^pattern/(?P<pk>\d+)/apply/$', PatternApply.as_view(), name='pattern.apply'),
     url(r'^$', Home.as_view(), name='home'),
 )

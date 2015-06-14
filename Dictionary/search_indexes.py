@@ -1,4 +1,4 @@
-from Dictionary.models import Word, Deriver
+from Dictionary.models import Word, Pattern
 from haystack.fields import CharField
 from haystack.indexes import SearchIndex, Indexable
 
@@ -12,9 +12,9 @@ class WordIndex(SearchIndex, Indexable):
         return Word
 
 
-class DeriverIndex(SearchIndex, Indexable):
+class PatternIndex(SearchIndex, Indexable):
     name = CharField(model_attr='name')
-    text = CharField(document=True, use_template=True, template_name='deriver/search_text')
+    text = CharField(document=True, use_template=True, template_name='pattern/search_text')
 
     def get_model(self):
-        return Deriver
+        return Pattern
