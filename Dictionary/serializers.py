@@ -6,13 +6,13 @@ from rest_framework import serializers
 class WordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
-        fields = ('pos', 'spelling', 'definition', 'examples', 'stem', 'pattern')
+        fields = ('id', 'pos', 'spelling', 'definition', 'examples', 'stem', 'pattern')
 
 
 class PatternSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pattern
-        fields = ('origin_pos', 'result_pos', 'origin_form', 'result_form', 'origin_pattern', 'example_stem', 'name')
+        fields = ('id', 'origin_pos', 'result_pos', 'origin_form', 'result_form', 'origin_pattern', 'example_stem', 'name')
 
 
 class ApplySerializer(serializers.Serializer):
@@ -22,13 +22,14 @@ class ApplySerializer(serializers.Serializer):
     def validate(self, data):
         if Word.objects.filter(pattern=data['pattern'], stem=data['parent']):
             raise ValidationError('pattern must not already be applied to this stem')
+        if data['pattern'].origin_pos != data['parent'].pos:
+            raise ValidationError('pattern\'s origin part of speech must match parent\'s part of speech')
         return data
 
     def create(self, validated_data):
         pattern = validated_data['pattern']
         parent = validated_data['parent']
-        spelling = pattern.apply_spelling(parent)
-        return Word.objects.create(pattern=pattern, stem=parent, spelling=spelling)
+        return pattern.apply(parent, save=True)
 
     def to_representation(self, instance):
         return WordSerializer().to_representation(self.instance)
