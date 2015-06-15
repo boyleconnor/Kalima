@@ -1,4 +1,5 @@
-from ArabicTools.constants import POS_CHOICES, ABJAD
+from ArabicTools.constants import POS_CHOICES
+from ArabicTools.regex import SOUND_TRILITERAL
 from ArabicTools.utils import pattern_to_form, apply, strip_diacritics
 from django.db.models import Model, CharField, ForeignKey, TextField
 from rest_framework.reverse import reverse_lazy
@@ -7,7 +8,7 @@ from rest_framework.reverse import reverse_lazy
 class Pattern(Model):
     origin_pos = CharField(max_length=16, choices=POS_CHOICES)
     result_pos = CharField(max_length=16, choices=POS_CHOICES)
-    origin_form = CharField(default=('([%s])' % ABJAD) * 3, max_length=255)
+    origin_form = CharField(default=SOUND_TRILITERAL, max_length=255)
     result_form = CharField(max_length=255)
     origin_pattern = ForeignKey('self', blank=True, null=True, related_name='result_patterns')
     example_stem = ForeignKey('Word', blank=True, null=True, related_name='example_in')
