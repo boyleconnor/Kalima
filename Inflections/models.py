@@ -1,7 +1,7 @@
 from ArabicTools.constants import CASE_CHOICES, GENDER_CHOICES, STATE_CHOICES, NUMBER_CHOICES, PERSON_CHOICES, \
     TENSE_CHOICES, VOICE_CHOICES
 from ArabicTools.utils import pattern_to_form, apply
-from Dictionary.models.Patterns import Pattern
+from Dictionary.models import Pattern
 from django.db.models import Model, ForeignKey, CharField, TextField
 
 
