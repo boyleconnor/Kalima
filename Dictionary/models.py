@@ -1,3 +1,4 @@
+import re
 from ArabicTools.constants import POS_CHOICES
 from ArabicTools.regex import SOUND_TRILITERAL
 from ArabicTools.utils import pattern_to_form, apply, strip_diacritics
@@ -15,7 +16,11 @@ class Pattern(Model):
     name = CharField(max_length=63, blank=True)
 
     def get_origin_form_display(self):
-        return pattern_to_form(self.origin_form)
+        if self.example_stem:
+            return self.example_stem.spelling
+        if self.origin_pattern:
+            return self.origin_pattern.get_result_form_display()
+        return ''
 
     def get_result_form(self):
         if self.example_stem:
@@ -24,6 +29,12 @@ class Pattern(Model):
             return self.apply(self.origin_pattern.get_result_form())
         else:
             return None
+
+    def get_result_form_display(self):
+        result_form = self.get_result_form()
+        if result_form:
+            return result_form.spelling
+        return ''
 
     def apply_spelling(self, word):
         return apply(self.origin_form, word.spelling, self.result_form)
@@ -36,6 +47,15 @@ class Pattern(Model):
 
     def get_absolute_url(self):
         return reverse_lazy('dictionary:pattern.detail', kwargs={'pk': self.pk})
+
+    def get_potential_words(self):
+        '''Returns a list of all words to which self could be (but has NOT been) applied
+        '''
+        parents = []
+        for parent in Word.objects.filter(pos=self.origin_pos):
+            if re.match(self.origin_form, parent.spelling) and not Word.objects.filter(pattern=self, stem=parent):
+                parents += [parent]
+        return parents
 
     def __str__(self):
         return '%s (%s)' % (self.name, self.get_result_form()) if self.get_result_form() else self.name
