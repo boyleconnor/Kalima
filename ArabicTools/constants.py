@@ -107,47 +107,49 @@ POS_CHOICES = (
     ('root', 'Root')
 )
 
-CASE_CHOICES = (
-    ('nominative', 'Nominative'),
-    ('genitive', 'Genitive'),
-    ('accusative', 'Accusative')
-)
+ALLOWED_INFLECTION_ATTRIBUTES = {
+    'adjective': ('case', 'number', 'state', 'gender'),
+    'noun': ('case', 'number', 'state'),
+    'verb': ('gender', 'number', 'person', 'tense', 'voice'),
+}
 
-GENDER_CHOICES = (
-    ('masculine', 'Masculine'),
-    ('feminine', 'Feminine')
-)
-
-NUMBER_CHOICES = (
-    ('singular', 'Singular'),
-    ('dual', 'Dual'),
-    ('plural', 'Plural')
-)
-
-STATE_CHOICES = (
-    ('construct', 'Construct'),
-    ('definite', 'Definite'),
-    ('indefinite', 'Indefinite')
-)
-
-PERSON_CHOICES = (
-    ('first', 'First'),
-    ('second', 'Second'),
-    ('third', 'Third')
-)
-
-TENSE_CHOICES = (
-    ('perfect', 'Perfect'),
-    ('indicative-imperfect', 'Indicative-Imperfect'),
-    ('subjunctive-imperfect', 'Subjunctive-Imperfect'),
-    ('jussive-imperfect', 'Jussive-Imperfect'),
-    ('imperative', 'Imperative')
-)
-
-VOICE_CHOICES = (
-    ('active', 'Active'),
-    ('passive', 'Passive')
-)
+ALLOWED_INFLECTION_ATTRIBUTE_VALUES = {
+    'case': (
+        'nominative',
+        'genitive',
+        'accusative'
+    ),
+    'gender': (
+        'masculine',
+        'feminine'
+    ),
+    'number': (
+        'singular',
+        'dual',
+        'plural'
+    ),
+    'state': (
+        'construct',
+        'definite',
+        'indefinite',
+    ),
+    'person': (
+        'first',
+        'second',
+        'third'
+    ),
+    'tense': (
+        'perfect',
+        'indicative-imperfect',
+        'subjunctive-imperfect',
+        'jussive-imperfect',
+        'imperative'
+    ),
+    'voice': (
+        'active',
+        'passive'
+    )
+}
 
 ARABIC_LANGUAGE_CODE = 'ar'
 
