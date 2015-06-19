@@ -12,7 +12,7 @@ class WordSerializer(serializers.ModelSerializer):
 class PatternSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pattern
-        fields = ('id', 'origin_pos', 'result_pos', 'origin_form', 'result_form', 'origin_pattern', 'example_stem', 'name')
+        fields = ('id', 'origin_pos', 'result_pos', 'origin_form', 'result_form', 'origin_pattern', 'example_stem', 'name', 'get_origin_form_display', 'get_result_form_display')
 
 
 class ApplySerializer(serializers.Serializer):
