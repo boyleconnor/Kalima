@@ -1,60 +1,76 @@
-from ArabicTools.constants import CASE_CHOICES, GENDER_CHOICES, STATE_CHOICES, NUMBER_CHOICES, PERSON_CHOICES, \
-    TENSE_CHOICES, VOICE_CHOICES
-from ArabicTools.utils import pattern_to_form, apply
-from Dictionary.models import Pattern
-from django.db.models import Model, ForeignKey, CharField, TextField
+from ArabicTools.mixins import AttributesMixin, AbstractPattern, Spellable
+from ArabicTools.utils import validate_inflection_attributes, validate_stem_attributes
+from django.db.models import Model, ForeignKey, CharField
+from django.db.models.fields.related import OneToOneField
 
 
-class Inflection(Model):
-    stem = ForeignKey('Dictionary.Word')
+class Inflection(AttributesMixin, Spellable):
+    stem = ForeignKey('Inflections.Stem', blank=True, null=True)
     pattern = ForeignKey('Inflections.Inflecter', blank=True, null=True)
-    spelling = CharField(max_length=250)
-    attributes = TextField()
 
-    case = CharField(max_length=20, choices=CASE_CHOICES, blank=True)
-    state = CharField(max_length=20, choices=STATE_CHOICES, blank=True)
-    number = CharField(max_length=20, choices=NUMBER_CHOICES, blank=True)
-    gender = CharField(max_length=20, choices=GENDER_CHOICES, blank=True)
-    person = CharField(max_length=20, choices=PERSON_CHOICES, blank=True)
-    tense = CharField(max_length=20, choices=TENSE_CHOICES, blank=True)
-    voice = CharField(max_length=20, choices=VOICE_CHOICES, blank=True)
-
-    def __str__(self):
-        return self.spelling
+    def clean(self):
+        validate_inflection_attributes(self.stem.pos, self.attributes)
 
 
-class Inflecter(Model):
-    origin_pattern = ForeignKey(Pattern)
-    origin_form = CharField(max_length=255)
-    result_form = CharField(max_length=255)
+class Stem(AttributesMixin, Spellable):
+    class Meta:
+        order_with_respect_to = 'parent'
+    parent = ForeignKey('Dictionary.Word')
+    pattern = ForeignKey('Inflections.Stemmer', blank=True, null=True)
+    exemplar = OneToOneField('Inflections.Inflection', related_name='exemplar_of', null=True)
 
-    case = CharField(max_length=20, choices=CASE_CHOICES, blank=True)
-    state = CharField(max_length=20, choices=STATE_CHOICES, blank=True)
-    number = CharField(max_length=20, choices=NUMBER_CHOICES, blank=True)
-    gender = CharField(max_length=20, choices=GENDER_CHOICES, blank=True)
-    person = CharField(max_length=20, choices=PERSON_CHOICES, blank=True)
-    tense = CharField(max_length=20, choices=TENSE_CHOICES, blank=True)
-    voice = CharField(max_length=20, choices=VOICE_CHOICES, blank=True)
+    def clean(self):
+        validate_stem_attributes(self.parent.pos, self.attributes)
 
-    def get_origin_form_display(self):
-        return pattern_to_form(self.origin_form)
 
-    def get_result_form(self):
-        return self.apply(self.origin_pattern.get_result_form())
+class Stemmer(AttributesMixin, AbstractPattern):
+    origin_pattern = ForeignKey('Dictionary.Pattern', blank=True, null=True)
 
-    def get_result_form_display(self):
-        return self.get_result_form().spelling
+    class Meta:
+        order_with_respect_to = 'origin_pattern'
+    result_model = Stem
 
-    def apply_spelling(self, word):
-        return apply(self.origin_form, word.spelling, self.result_form)
+    def clean(self):
+        validate_stem_attributes(self.origin_pattern.result_pos, self.attributes)
 
-    def apply(self, stem, save=False, **kwargs):
-        result = Inflection(spelling=self.apply_spelling(stem), stem=stem, pattern=self, **kwargs)
-        for attribute in ('case', 'state', 'number', 'gender', 'person', 'tense', 'voice'):
-            setattr(result, attribute, getattr(self, attribute))
+    def apply(self, *args, **kwargs):
+        return super(Stemmer, self).apply(attributes=self.attributes, *args, **kwargs)
+
+
+class Paradigm(Model):
+    name = CharField(max_length=100)
+
+
+class Inflecter(AttributesMixin):
+    result_model = Inflection
+    paradigm = ForeignKey(Paradigm, null=True)
+    prefix = CharField(max_length=10, blank=True)
+    suffix = CharField(max_length=10, blank=True)
+
+    def generate_spelling(self, spelling):
+        return self.prefix + spelling + self.suffix
+
+    def apply(self, stem, save=False, *args, **kwargs):
+        if Inflection.objects.filter(stem=stem, pattern=self): raise ValueError('Inflection with given stem and pattern already exists')
+        result = Inflection(attributes=self.attributes, spelling=self.generate_spelling(stem.spelling), stem=stem, pattern=self, *args, **kwargs)
         if save:
             result.save()
         return result
 
+    def apply_to_best_stem(self, word, save=False):
+        for stem in word.stem_set.all():
+            if self.attributes_match(stem):
+                return self.apply(stem, save=save)
+
+    def attributes_match(self, stem):
+        stem_attributes = stem.get_attributes()
+        stem_is_bad = False
+        for attribute in stem_attributes:
+            if self.get_attributes()[attribute] not in stem_attributes[attribute].split('/'):
+                stem_is_bad = True
+                break
+        if not stem_is_bad:
+            return True
+
     def __str__(self):
-        return self.get_result_form_display()
+        return '%s %s' % (self.prefix, self.suffix)

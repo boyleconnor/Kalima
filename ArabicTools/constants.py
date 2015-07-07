@@ -195,3 +195,5 @@ ARABIZI = {
     HAMZA: '2',
     TAA_MARBUTA: 'h',
 }
+
+MAX_SPELLING_LENGTH = 100

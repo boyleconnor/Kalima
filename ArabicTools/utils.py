@@ -1,7 +1,6 @@
-from ArabicTools.constants import DIACRITICS, SHADDA, DEFAULT_ROOT_SPELLING, ALLOWED_INFLECTION_ATTRIBUTES, POS_CHOICES, \
+from ArabicTools.constants import DIACRITICS, DEFAULT_ROOT_SPELLING, ALLOWED_INFLECTION_ATTRIBUTES, POS_CHOICES, \
     ALLOWED_INFLECTION_ATTRIBUTE_VALUES
 import re
-from ArabicTools.regex import LETTER
 from django.core.exceptions import ValidationError
 
 
@@ -10,22 +9,6 @@ def apply(origin_form, word, result_form):
         return re.match(origin_form, word).expand(result_form)
     except AttributeError:
         raise ValueError('word did not match origin_form')
-
-
-def pattern_to_form(pattern):  # FIXME: This will break for patterns expecting more than three letters
-    pattern = pattern.replace(LETTER, 'x')
-    form = ''
-    default_root = list(DEFAULT_ROOT_SPELLING)
-    for letter in pattern:
-        if letter == 'x':
-            form += default_root.pop(0)
-        else:
-            form += letter
-    return form
-
-
-def form_to_pattern(form, example='فعل'):
-    pass
 
 
 def transcribe(spelling, code):
@@ -71,7 +54,7 @@ def dict_to_attributes(dict_in):
     return attributes
 
 
-def validate_inflection_attributes(part_of_speech, attributes):
+def validate_inflection_or_stem_attributes(part_of_speech, attributes):
     if part_of_speech not in dict(POS_CHOICES):
         raise ValidationError('part_of_speech not allowed part of speech')
     if part_of_speech not in ALLOWED_INFLECTION_ATTRIBUTES:
@@ -79,8 +62,22 @@ def validate_inflection_attributes(part_of_speech, attributes):
     attribute_dict = attributes_to_dict(attributes)
     for attribute in attribute_dict:
         if attribute not in ALLOWED_INFLECTION_ATTRIBUTE_VALUES:
-            raise ValidationError('%s is not an allowed attribute' % attribute)
+            raise ValidationError('"%s" is not an allowed attribute' % attribute)
         if attribute not in ALLOWED_INFLECTION_ATTRIBUTES[part_of_speech]:
-            raise ValidationError('%s is not an allowed attribute for %s' % (attribute, part_of_speech))
+            raise ValidationError('"%s" is not an allowed attribute for part of speech "%s"' % (attribute, part_of_speech))
+
+
+def validate_inflection_attributes(part_of_speech, attributes):
+    attribute_dict = validate_inflection_or_stem_attributes(part_of_speech, attributes)
+    for attribute in attribute_dict:
         if attribute_dict[attribute] not in ALLOWED_INFLECTION_ATTRIBUTE_VALUES[attribute]:
-            raise ValidationError('%s is not a valid value for attribute %s' % (attribute_dict[attribute], attribute))
+            raise ValidationError('"%s" is not a valid value for attribute "%s"' % (attribute_dict[attribute], attribute))
+
+
+def validate_stem_attributes(part_of_speech, attributes):
+    attribute_dict = validate_inflection_or_stem_attributes(part_of_speech, attributes)
+    for attribute in attribute_dict:
+        values = attribute[attribute].split('/')
+        for value in values:
+            if value not in ALLOWED_INFLECTION_ATTRIBUTE_VALUES[attribute]:
+                raise ValidationError('"%s" is not a valid value for attribute "%s"' % (attribute_dict[attribute], attribute))
