@@ -65,6 +65,7 @@ def validate_inflection_or_stem_attributes(part_of_speech, attributes):
             raise ValidationError('"%s" is not an allowed attribute' % attribute)
         if attribute not in ALLOWED_INFLECTION_ATTRIBUTES[part_of_speech]:
             raise ValidationError('"%s" is not an allowed attribute for part of speech "%s"' % (attribute, part_of_speech))
+    return attribute_dict
 
 
 def validate_inflection_attributes(part_of_speech, attributes):
@@ -77,7 +78,7 @@ def validate_inflection_attributes(part_of_speech, attributes):
 def validate_stem_attributes(part_of_speech, attributes):
     attribute_dict = validate_inflection_or_stem_attributes(part_of_speech, attributes)
     for attribute in attribute_dict:
-        values = attribute[attribute].split('/')
+        values = attribute_dict[attribute].split('/')
         for value in values:
             if value not in ALLOWED_INFLECTION_ATTRIBUTE_VALUES[attribute]:
                 raise ValidationError('"%s" is not a valid value for attribute "%s"' % (attribute_dict[attribute], attribute))
