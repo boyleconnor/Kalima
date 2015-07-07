@@ -9,7 +9,7 @@ class Inflection(AttributesMixin, Spellable):
     pattern = ForeignKey('Inflections.Inflecter', blank=True, null=True)
 
     def clean(self):
-        validate_inflection_attributes(self.stem.pos, self.attributes)
+        validate_inflection_attributes(self.stem.parent.pos, self.attributes)
 
 
 class Stem(AttributesMixin, Spellable):
