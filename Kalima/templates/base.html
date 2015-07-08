@@ -1,24 +1,23 @@
 {% load i18n %}
 <html>
 <head>
-    <title>{% block title %}{% endblock %} - Kalima</title>
+    <title>{% block title %}{% endblock %} - كلمة</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 </head>
 <body>
 <div id="nav-bar">
-    <a href="{% url 'dictionary:home' %}">{% trans 'Home' %}</a> &nbsp;
+    <a href="{% url 'main:home' %}">{% trans 'Home' %}</a> &nbsp;
     {% if user.is_authenticated %}
         {% trans 'Current User: ' %}{{ user }}&nbsp;<a href="{% url 'account_logout' %}">{% trans 'Log Out' %}</a>
     {% else %}
         <a href="{% url 'account_login' %}">{% trans 'Log In' %}</a>
     {% endif %}
-    <a href="{% url 'dictionary:word.create' %}">{% trans 'Add Word' %}</a>
-    <a href="{% url 'dictionary:pattern.create' %}">{% trans 'Add Pattern' %}</a>
-    <form action="{% url 'dictionary:word.search' %}" method="get">
-        {{ search_form.as_p }}
-        <input type="submit" value="{% trans 'Search' %}">
-        {% csrf_token %}
-    </form>
 </div>
+
 {% block content %}{% endblock %}
+
 </body>
+<div>
+	{% block script %}{% endblock %}
+</div>
 </html>
