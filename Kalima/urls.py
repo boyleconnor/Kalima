@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^auth/', include('allauth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^dictionary/', include('Dictionary.urls', namespace='dictionary')),
+    url(r'^', include('Main.urls', namespace='main')),
 )
 
 
