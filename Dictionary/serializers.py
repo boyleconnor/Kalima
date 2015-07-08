@@ -6,7 +6,7 @@ from rest_framework import serializers
 class WordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
-        fields = ('id', 'pos', 'spelling', 'definition', 'examples', 'stem', 'pattern')
+        fields = ('id', 'pos', 'spelling', 'definition', 'examples', 'parent', 'pattern')
 
 
 class PatternSerializer(serializers.ModelSerializer):
