@@ -1,29 +1,20 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% load i18n %}
 
-{% block title %}{% trans "Home" %}{% endblock %}
-
 {% block content %}
-	<div ng-app="myApp" ng-controller="loadWords">
-		{% verbatim %}
-		<table>
-			<tr ng-repeat="word in words">
-				<td>{{ word.spelling }}</td>
-				<td>{{ word.pos }}</td>
-				<td>{{ word.definition }}</td>
-			</tr>
-		</table>
-		{% endverbatim %}
-	</div>
-{% endblock %}
-
-{% block script %}
-<script>
-	var app = angular.module('myApp', []);
-	app.controller('loadWords', function($scope, $http) {
-		$http.get("{% url 'dictionary:word.list' %}")
-			.success(function (response) {$scope.words = response;});
-		});
-</script>
+	<table>
+		<tr>
+			<th>{% trans 'Word' %}</th>
+			<th>{% trans 'Part of Speech' %}</th>
+			<th>{% trans 'Definition' %}</th>
+		</tr>
+		{% for word in words %}
+		<tr>
+			<td><a href="{{ word.get_absolute_url }}">{{ word.spelling }}</a></td>
+			<td>{{ word.get_pos_display }}</td>
+			<td>{{ word.definition }}</td>
+		</tr>
+		{% endfor %}
+	</table>
 {% endblock %}
