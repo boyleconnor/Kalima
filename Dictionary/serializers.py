@@ -6,7 +6,11 @@ from rest_framework import serializers
 class WordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
-        fields = ('id', 'pos', 'spelling', 'definition', 'examples', 'parent', 'pattern')
+        fields = ('id', 'pos', 'spelling', 'definition', 'examples', 'parent', 'pattern', 'parent_url', 'pattern_url')
+    parent_url = serializers.HyperlinkedRelatedField(source='parent', read_only=True, view_name='dictionary:word.detail')
+    pattern_url = serializers.HyperlinkedRelatedField(source='pattern', read_only=True, view_name='dictionary:pattern.detail')
+
+
 
 
 class PatternSerializer(serializers.ModelSerializer):
