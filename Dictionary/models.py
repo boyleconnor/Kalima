@@ -22,7 +22,7 @@ class Word(Spellable):
             return stem.get_root()
 
     def get_absolute_url(self):
-        return reverse_lazy('dictionary:word.detail', kwargs={'pk': self.pk})
+        return reverse_lazy('dictionary:word.detail.html', kwargs={'pk': self.pk})
 
     def get_inflections(self):
         '''Returns each inflection associated with each stem associated with this word
@@ -32,6 +32,7 @@ class Word(Spellable):
             for inflection in stem.inflection_set.all():
                 inflections.append(inflection)
         return inflections 
+
 
 class Pattern(AbstractPattern):
     origin_pattern = ForeignKey('Dictionary.Pattern', blank=True, null=True)
