@@ -23,6 +23,11 @@ class WordListHTML(ListView):
     model = Word
     template_name = 'word/list.html'
 
+    def filter_queryset(self, queryset):
+        if self.request.GET:
+            return queryset.filter(**self.request.GET.dict())
+        return queryset
+
     def get_queryset(self):
         queryset = super(WordListHTML, self).get_queryset()
         return self.filter_queryset(queryset)
