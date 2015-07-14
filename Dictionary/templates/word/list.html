@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Words' %}{% endblock %}
+
+{% block content %}
+<table>
+	<tr>
+		<th>{% trans 'Spelling' %}</th>
+		<th>{% trans 'Part of Speech' %}</th>
+		<th>{% trans 'Definition' %}</th>
+	</tr>
+	{% for word in word_list %}
+	<tr>
+		<td><a href="{% url 'dictionary:word.detail.html' pk=word.pk %}">{{ word.spelling }}</a></td>
+		<td>{{ word.get_pos_display }}</td>
+		<td>{{ word.definition }}</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}
