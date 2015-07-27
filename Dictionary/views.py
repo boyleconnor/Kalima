@@ -4,12 +4,12 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from django.views.generic import DetailView, ListView
 
 
-class WordList(ListCreateAPIView):
+class WordListJSON(ListCreateAPIView):
     queryset = Word.objects.all()
     serializer_class = WordSerializer
 
 
-class WordDetail(RetrieveUpdateDestroyAPIView):
+class WordDetailJSON(RetrieveUpdateDestroyAPIView):
     queryset = Word.objects.all()
     serializer_class = WordSerializer
 
@@ -32,15 +32,15 @@ class WordListHTML(ListView):
         queryset = super(WordListHTML, self).get_queryset()
         return self.filter_queryset(queryset)
 
-class PatternList(ListCreateAPIView):
+class PatternListJSON(ListCreateAPIView):
     queryset = Pattern.objects.all()
     serializer_class = PatternSerializer
 
 
-class PatternDetail(RetrieveUpdateDestroyAPIView):
+class PatternDetailJSON(RetrieveUpdateDestroyAPIView):
     queryset = Pattern.objects.all()
     serializer_class = PatternSerializer
 
 
-class PatternApply(CreateAPIView):
+class PatternApplyJSON(CreateAPIView):
     serializer_class = ApplySerializer
