@@ -43,7 +43,6 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.facebook',
     'whoosh',
     'haystack',
-    'guardian',
     'rest_framework',
     'Dictionary',
     'Inflections',
