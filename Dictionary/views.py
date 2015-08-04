@@ -1,7 +1,6 @@
 from Dictionary.models import Word, Pattern
 from Dictionary.serializers import WordSerializer, PatternSerializer, ApplySerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
-from django.views.generic import DetailView, ListView
 
 
 class WordList(ListCreateAPIView):
