@@ -21,7 +21,7 @@ class Spellable(Model):
 class AttributesMixin(Model):
     class Meta:
         abstract = True
-    attributes = TextField(validators=AttributesValidator())
+    attributes = TextField(validators=[AttributesValidator()])
 
     def get_attributes(self):
         return attributes_to_dict(self.attributes)
