@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+<table>
+	<tr>
+		<td>{% trans 'Spelling' %}</td>
+		<td>{{ word.spelling }}</td>
+	</tr>
+	<tr>
+		<td>{% trans 'Part of Speech' %}</td>
+		<td>{{ word.get_pos_display }}</td>
+	</tr>
+	<tr>
+		<td>{% trans 'Definition' %}</td>
+		<td>{{ word.definition }}</td>
+	</tr>
+</table>
+{% endblock %}
