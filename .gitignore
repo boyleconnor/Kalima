@@ -5,6 +5,7 @@
 db.sqlite3
 *.swp
 *.iml
+migrations/*
 
 ## Directory-based project format:
 .idea/
