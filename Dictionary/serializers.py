@@ -11,8 +11,6 @@ class WordSerializer(serializers.ModelSerializer):
     pattern_url = serializers.HyperlinkedRelatedField(source='pattern', read_only=True, view_name='dictionary:pattern.detail')
 
 
-
-
 class PatternSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pattern
