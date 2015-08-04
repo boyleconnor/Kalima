@@ -11,7 +11,7 @@
 		</tr>
 		{% for word in words %}
 		<tr>
-			<td><a href="{{ word.get_absolute_url }}">{{ word.spelling }}</a></td>
+			<td><a href="{% url "main:word" pk=word.pk %}">{{ word.spelling }}</a></td>
 			<td>{{ word.get_pos_display }}</td>
 			<td>{{ word.definition }}</td>
 		</tr>
