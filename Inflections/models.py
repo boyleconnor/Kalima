@@ -13,8 +13,6 @@ class Inflection(AttributesMixin, Spellable):
 
 
 class Stem(AttributesMixin, Spellable):
-    class Meta:
-        order_with_respect_to = 'parent'
     parent = ForeignKey('Dictionary.Word')
     pattern = ForeignKey('Inflections.Stemmer', blank=True, null=True)
     exemplar = OneToOneField('Inflections.Inflection', related_name='exemplar_of', null=True)
