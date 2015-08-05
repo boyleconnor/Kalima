@@ -6,3 +6,8 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 class InflectionList(ListCreateAPIView):
     queryset = Inflection.objects.all()
     serializer_class = InflectionSerializer
+
+
+class InflectionDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Inflection.objects.all()
+    serializer_class = InflectionSerializer
