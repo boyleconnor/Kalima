@@ -1,7 +1,6 @@
 from ArabicTools.mixins import AttributesMixin, AbstractPattern, Spellable
 from ArabicTools.utils import validate_inflection_attributes, validate_stem_attributes
-from django.db.models import Model, ForeignKey, CharField
-from django.db.models.fields.related import OneToOneField
+from django.db.models import Model, ForeignKey, OneToOneField, CharField
 
 
 class Inflection(AttributesMixin, Spellable):
