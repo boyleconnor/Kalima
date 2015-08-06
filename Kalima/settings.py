@@ -143,3 +143,7 @@ HAYSTACK_CONNECTIONS = {
         'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
     },
 }
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+}
