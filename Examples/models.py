@@ -22,7 +22,6 @@ class ExampleMember(Model):
         unique_together = (
             ('position', 'example'),
         )
-        order_with_respect_to = 'example'
     example = ForeignKey(Example, related_name='members')
     inflection = ForeignKey(Inflection)
     position = PositiveSmallIntegerField()
