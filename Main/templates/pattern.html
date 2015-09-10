@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Pattern: " %}{{ pattern }}{% endblock %}
+
+{% block content %}
+<h1>{{ pattern }}</h1>
+<table>
+	<tr>
+		<td>{% trans 'Origin Pattern' %}</td>
+		<td>{{ pattern.get_origin_form }}</td>
+	</tr>
+	<tr>
+		<td>{% trans 'Result Pattern' %}</td>
+		<td>{{ word.get_result_form }}</td>
+	</tr>
+	<tr>
+		<td>{% trans 'Origin Part of Speech' %}</td>
+		<td>{{ word.origin_pos }}</td>
+	</tr>
+	<tr>
+		<td>{% trans 'Result Part of Speech' %}</td>
+		<td>{{ word.result_pos }}</td>
+	</tr>
+</table>
+{% endblock %}
