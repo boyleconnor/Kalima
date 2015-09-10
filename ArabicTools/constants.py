@@ -3,7 +3,7 @@ ROOT_LENGTH_CHOICES = (
     (4, 'Four')
 )
 
-DEFAULT_ROOT_SPELLING = 'فعل'
+DEFAULT_ROOT_SPELLING = 'ف ع ل'
 
 FATHA = 'َ'
 
