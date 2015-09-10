@@ -1,4 +1,4 @@
-from ArabicTools.constants import MAX_SPELLING_LENGTH
+from ArabicTools.constants import MAX_SPELLING_LENGTH, DEFAULT_ROOT_SPELLING
 from ArabicTools.utils import attributes_to_dict, strip_diacritics, apply
 from ArabicTools.validators import AttributesValidator
 from django.db.models import Model, TextField, CharField
@@ -30,7 +30,7 @@ class AttributesMixin(Model):
 class AbstractPattern(Model):
     class Meta:
         abstract = True
-    origin_form = CharField(max_length=255)
+    origin_form = CharField(max_length=255, default=DEFAULT_ROOT_SPELLING)
     result_form = CharField(max_length=255)
     origin_model = None
     result_model = None
