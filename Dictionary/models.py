@@ -35,7 +35,7 @@ class Word(Spellable):
 
 
 class Pattern(AbstractPattern):
-    origin_pattern = ForeignKey('Dictionary.Pattern', blank=True, null=True)
+    origin_pattern = ForeignKey('Dictionary.Pattern', blank=True, null=True, related_name='result_patterns')
     result_model = Word
     origin_pos = CharField(max_length=16, choices=POS_CHOICES)
     result_pos = CharField(max_length=16, choices=POS_CHOICES)
