@@ -8,4 +8,4 @@ SOUND_TRILITERAL = ' '.join(((SOUND_LETTER,) * 3))
 
 WORD = '[%s]+' % ARABIC_CHARACTERS
 
-ATTRIBUTES_REGEX = '^((.+):(.+))?(\n(.+):(.+))*$'
+ATTRIBUTES_REGEX = '^((.+):(.+))?(\n(.+):(.+))*$' # ex: '''gender:masculine\nnumber:plural'''
