@@ -4,8 +4,6 @@ from ArabicTools.validators import AttributesValidator
 from django.db.models import Model, TextField, CharField
 
 
-
-
 class Spellable(Model):
     class Meta:
         abstract = True
