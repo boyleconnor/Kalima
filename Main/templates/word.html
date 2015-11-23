@@ -39,5 +39,21 @@
 	<tr><td><i>{% trans 'None' %}</i></td></tr>
 	{% endfor %}
 </table>
+{% if word.stem_set.all %}
+<table>
+	<tr>
+		<th colspan="2">{% trans 'Stems' %}</th>
+	</tr>
+	<tr>
+		<td>{% trans 'Spelling' %}</td>
+		<td>{% trans 'Attributes' %}</td>
+	</tr>
+	{% for stem in word.stem_set.all %}
+	<tr>
+		<td>{{ stem }}</td>
+		<td>{{ stem.attributes }}</td>{# TODO: render in human-readable (and translated) format #}
+	</tr>
+	{% endfor %}
+{% endif %}
 
 {% endblock %}
