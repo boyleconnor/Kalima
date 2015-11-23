@@ -18,5 +18,26 @@
 		<td>{% trans 'Definition' %}</td>
 		<td>{{ word.definition }}</td>
 	</tr>
+	{% if word.parent %}
+	<tr>
+		<td>{% trans 'Parent' %}</td>
+		<td><a href="{% url 'main:word' pk=word.parent.pk %}">{{ word.parent }}</a></td>
+	</tr>
+	{% endif %}
 </table>
+<table>
+	<tr>
+		<th colspan="3">{% trans 'Descendants' %}</th>
+	</tr>
+	{% for descendant in word.derivatives.all %}
+	<tr>
+		<td><a href="{% url 'main:word' pk=descendant.pk %}">{{ descendant.spelling }}</a></td>
+		<td>{{ descendant.pos }}</td>
+		<td>{{ descendant.definition }}</td>
+	</tr>
+	{% empty %}
+	<tr><td><i>{% trans 'None' %}</i></td></tr>
+	{% endfor %}
+</table>
+
 {% endblock %}
