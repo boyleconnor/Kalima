@@ -1,12 +1,13 @@
 from Inflections.models import Inflection, Stem, Stemmer, Paradigm, Inflecter
 from Inflections.serializers import InflectionSerializer, StemSerializer, StemmerSerializer, ParadigmSerializer, InflecterSerializer
+from Inflections.filters import InflectionFilter
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 
 class InflectionList(ListCreateAPIView):
     queryset = Inflection.objects.all()
     serializer_class = InflectionSerializer
-    filter_fields = ('stem__parent',)
+    filter_class = InflectionFilter
 
 
 class InflectionDetail(RetrieveUpdateDestroyAPIView):
