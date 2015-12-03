@@ -1,6 +1,6 @@
 from Inflections.models import Inflection, Stem, Stemmer, Paradigm, Inflecter
 from Inflections.serializers import InflectionSerializer, StemSerializer, StemmerSerializer, ParadigmSerializer, InflecterSerializer
-from Inflections.filters import InflectionFilter
+from Inflections.filters import InflectionFilter, StemFilter
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 
@@ -18,6 +18,7 @@ class InflectionDetail(RetrieveUpdateDestroyAPIView):
 class StemList(ListCreateAPIView):
     queryset = Stem.objects.all()
     serializer_class = StemSerializer
+    filter_class = StemFilter
 
 
 class StemDetail(RetrieveUpdateDestroyAPIView):
