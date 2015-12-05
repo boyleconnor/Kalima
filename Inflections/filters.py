@@ -7,7 +7,7 @@ class InflectionFilter(FilterSet):
     word = ModelChoiceFilter(queryset=Word.objects.all(), name='stem__parent')
     class Meta:
         model = Inflection
-        fields = ['word']
+        fields = ['word', 'stem']
 
 
 class StemFilter(FilterSet):
