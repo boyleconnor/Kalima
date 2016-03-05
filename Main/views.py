@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, CreateView
 from Dictionary.models import Word, Pattern
+from Dictionary.forms import WordForm
 
 
 class HomeView(TemplateView):
@@ -15,6 +16,12 @@ class HomeView(TemplateView):
 class WordView(DetailView):
     template_name = 'word.html'
     model = Word
+
+
+class AddWordView(CreateView):
+    template_name = 'add_word.html'
+    model = Word
+    form_class = WordForm
 
 
 class PatternView(DetailView):
