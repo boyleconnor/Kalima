@@ -16,5 +16,11 @@
 			<td>{{ word.definition }}</td>
 		</tr>
 		{% endfor %}
+		{% if user.is_superuser %}
+		<tr>
+			<td><a href="{% url 'main:add_word' %}"><i>{% trans 'Add word' %}</i></a>
+			<td colspan=2></td>
+		</tr>
+		{% endif %}
 	</table>
 {% endblock %}
