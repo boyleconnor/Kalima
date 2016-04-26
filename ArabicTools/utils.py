@@ -11,6 +11,22 @@ def apply(origin_form, word, result_form):
         raise ValueError('word did not match origin_form')
 
 
+def gen_origin_pattern(origin_form, specials):
+    origin_pattern = ''
+    special_letters = specials.keys()
+    specials_count = dict(zip(special_letters, (0,)*len(special_letters)))
+    for letter in origin_form:
+        if letter in special_letters:
+            if not specials_count[letter]:
+                origin_pattern += '(?P<%s>%s)' % (letter, specials[letter])
+            else:
+                origin_pattern += '(?P=%s)' % (letter,)
+            specials_count[letter] += 1
+        else:
+            origin_pattern += letter
+    return origin_pattern
+
+
 def transcribe(spelling, code):
     output = ''
     for letter in spelling:
