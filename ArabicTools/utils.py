@@ -35,6 +35,18 @@ def gen_origin_pattern(origin_form, specials):
     return origin_pattern
 
 
+def gen_result_pattern(result_form, specials):
+    result_pattern = ''
+    special_letters = specials.keys()
+    check_special_letters(special_letters)
+    for letter in result_form:
+        if letter in special_letters:
+            result_pattern += '{%s}' % letter
+        else:
+            result_pattern += letter
+    return result_pattern
+
+
 def transcribe(spelling, code):
     output = ''
     for letter in spelling:
