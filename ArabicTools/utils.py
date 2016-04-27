@@ -1,6 +1,7 @@
 from ArabicTools.constants import DIACRITICS, DEFAULT_ROOT_SPELLING, ALLOWED_INFLECTION_ATTRIBUTES, POS_CHOICES, \
     ALLOWED_INFLECTION_ATTRIBUTE_VALUES
 import re
+import string
 from django.core.exceptions import ValidationError
 
 
@@ -9,11 +10,18 @@ def apply(origin_form, word, result_form):
         return re.match(origin_form, word).expand(result_form)
     except AttributeError:
         raise ValueError('word did not match origin_form')
+def check_special_letters(special_letters):
+    if any([len(special_key) > 1 for special_key in special_letters]):
+        raise ValueError('Specials must be one character long')
+    bad_specials = set(special_letters) & set(string.digits)
+    if bad_specials:
+        raise ValueError('Specials cannot be digits: %s' % bad_specials)
 
 
 def gen_origin_pattern(origin_form, specials):
-    origin_pattern = ''
     special_letters = specials.keys()
+    check_special_letters(special_letters)
+    origin_pattern = ''
     specials_count = dict(zip(special_letters, (0,)*len(special_letters)))
     for letter in origin_form:
         if letter in special_letters:
