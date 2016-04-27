@@ -5,11 +5,6 @@ import string
 from django.core.exceptions import ValidationError
 
 
-def apply(origin_form, word, result_form):
-    try:
-        return re.match(origin_form, word).expand(result_form)
-    except AttributeError:
-        raise ValueError('word did not match origin_form')
 def check_special_letters(special_letters):
     if any([len(special_key) > 1 for special_key in special_letters]):
         raise ValueError('Specials must be one character long')
@@ -45,6 +40,15 @@ def gen_result_pattern(result_form, specials):
         else:
             result_pattern += letter
     return result_pattern
+
+
+def apply(origin_form, specials, word, result_form):
+    origin_pattern = gen_origin_pattern(origin_form, specials)
+    match = re.match(origin_pattern, word)
+    if not match:
+        raise ValidationError('Word did not match origin form')
+    result_pattern = gen_result_pattern(result_form, specials)
+    return result_pattern.format(**match.groupdict())
 
 
 def transcribe(spelling, code):
