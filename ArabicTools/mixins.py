@@ -38,11 +38,6 @@ class AbstractPattern(Model):
             raise NotImplementedError('must define "get_result_model" or "result_model"')
         return self.result_model
 
-    def get_result_model(self):
-        if not self.origin_model:
-            raise NotImplementedError('must define "get_origin_model" or "origin_model"')
-        return self.origin_model
-
     def generate_spelling(self, origin_spelling):
         return apply(self.origin_form, origin_spelling, self.result_form)
 
