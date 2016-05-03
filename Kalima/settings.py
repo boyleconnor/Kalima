@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'whoosh',
     'haystack',
     'rest_framework',
+    'ArabicTools',
     'Dictionary',
     'Inflections',
     'Examples',
