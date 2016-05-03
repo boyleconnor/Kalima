@@ -1,7 +1,8 @@
 from ArabicTools.constants import MAX_SPELLING_LENGTH, DEFAULT_ROOT_SPELLING
 from ArabicTools.utils import attributes_to_dict, strip_diacritics, apply
 from ArabicTools.validators import AttributesValidator
-from django.db.models import Model, TextField, CharField
+from ArabicTools.models import SpecialSet
+from django.db.models import Model, ForeignKey, TextField, CharField
 
 
 class Spellable(Model):
@@ -32,6 +33,7 @@ class AbstractPattern(Model):
     result_form = CharField(max_length=255)
     origin_model = None
     result_model = None
+    special_set = ForeignKey(SpecialSet)
 
     def get_result_model(self):
         if not self.result_model:
@@ -39,7 +41,12 @@ class AbstractPattern(Model):
         return self.result_model
 
     def generate_spelling(self, origin_spelling):
-        return apply(self.origin_form, origin_spelling, self.result_form)
+        return apply(
+            origin_form=self.origin_form,
+            specials=self.special_set.get_specials(),
+            word=origin_spelling,
+            result_form=self.result_form
+        )
 
     def apply(self, origin, save=False, *args, **kwargs):
         if self.get_result_model().objects.filter(parent=origin, pattern=self):
