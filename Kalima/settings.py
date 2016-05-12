@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
     'whoosh',
     'haystack',
     'rest_framework',
@@ -129,12 +128,6 @@ LOGIN_URL = '/auth/login/'
 LOGOUT_URL = '/auth/logout/'
 
 SOCIALACCOUNT_QUERY_EMAIL = True
-SOCIALACCOUNT_PROVIDERS = {
-    'facebook': {
-        'SCOPE': ['email', 'publish_stream'],
-        'METHOD': 'js_sdk'  # instead of 'oauth2'
-    }
-}
 
 SITE_ID = 1
 
