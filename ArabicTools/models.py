@@ -10,6 +10,9 @@ class SpecialSet(Model):
             specials[special.key] = special.value
         return specials
 
+    def __str__(self):
+        return self.name
+
 
 class Special(Model):
     class Meta:
