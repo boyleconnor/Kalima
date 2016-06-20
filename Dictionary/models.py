@@ -57,3 +57,6 @@ class Pattern(AbstractPattern):
             if re.match(self.origin_form, parent.spelling) and not Word.objects.filter(pattern=self, stem=parent):
                 parents += [parent]
         return parents
+
+    def __str__(self):
+        return self.name
