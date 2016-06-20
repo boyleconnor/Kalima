@@ -46,11 +46,6 @@ class Pattern(AbstractPattern):
     def apply(self, *args, **kwargs):
         return super(Pattern, self).apply(pos=self.result_pos, *args, **kwargs)
 
-    def get_origin_form(self):
-        if self.example_stem:
-            return self.example_stem.spelling
-        return super(Pattern, self).get_origin_form()
-
     def get_absolute_url(self):
         return reverse_lazy('dictionary:pattern.detail', kwargs={'pk': self.pk})
 
