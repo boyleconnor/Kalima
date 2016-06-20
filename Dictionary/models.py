@@ -39,7 +39,6 @@ class Pattern(AbstractPattern):
     result_model = Word
     origin_pos = CharField(max_length=16, choices=POS_CHOICES)
     result_pos = CharField(max_length=16, choices=POS_CHOICES)
-    example_stem = ForeignKey('Word', blank=True, null=True, related_name='example_in')
     paradigm = ForeignKey('Inflections.Paradigm', null=True)
     name = CharField(max_length=63, blank=True)
 
