@@ -24,6 +24,12 @@
 		<td><a href="{% url 'main:word' pk=word.parent.pk %}">{{ word.parent }}</a></td>
 	</tr>
 	{% endif %}
+	{% if word.pattern %}
+	<tr>
+		<td>{% trans 'Pattern' %}</td>
+		<td><a href="{% url 'main:pattern' pk=word.pattern.pk %}">{{ word.pattern }}</a></td>
+	</tr>
+	{% endif %}
 </table>
 <table>
 	<tr>
