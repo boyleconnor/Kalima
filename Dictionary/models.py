@@ -39,7 +39,7 @@ class Pattern(AbstractPattern):
     result_model = Word
     origin_pos = CharField(max_length=16, choices=POS_CHOICES)
     result_pos = CharField(max_length=16, choices=POS_CHOICES)
-    paradigm = ForeignKey('Inflections.Paradigm', null=True)
+    paradigm = ForeignKey('Inflections.Paradigm', blank=True, null=True)
     name = CharField(max_length=63, blank=True)
 
     def apply(self, *args, **kwargs):
