@@ -39,17 +39,11 @@ class Pattern(AbstractPattern):
     result_model = Word
     origin_pos = CharField(max_length=16, choices=POS_CHOICES)
     result_pos = CharField(max_length=16, choices=POS_CHOICES)
-    example_stem = ForeignKey('Word', blank=True, null=True, related_name='example_in')
-    paradigm = ForeignKey('Inflections.Paradigm', null=True)
+    paradigm = ForeignKey('Inflections.Paradigm', blank=True, null=True)
     name = CharField(max_length=63, blank=True)
 
     def apply(self, *args, **kwargs):
         return super(Pattern, self).apply(pos=self.result_pos, *args, **kwargs)
-
-    def get_origin_form(self):
-        if self.example_stem:
-            return self.example_stem.spelling
-        return super(Pattern, self).get_origin_form()
 
     def get_absolute_url(self):
         return reverse_lazy('dictionary:pattern.detail', kwargs={'pk': self.pk})
@@ -62,3 +56,6 @@ class Pattern(AbstractPattern):
             if re.match(self.origin_form, parent.spelling) and not Word.objects.filter(pattern=self, stem=parent):
                 parents += [parent]
         return parents
+
+    def __str__(self):
+        return self.name
