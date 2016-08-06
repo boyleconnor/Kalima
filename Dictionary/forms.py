@@ -22,7 +22,6 @@ class WordSearchForm(SearchForm):
 
 class PatternApplyForm(Form):
     stem = ModelChoiceField(queryset=Word.objects.all())
-    pattern = ModelChoiceField(queryset=Pattern.objects.all(), widget=HiddenInput())
 
     def apply(self, pattern, save=True):
         return pattern.apply(self.cleaned_data['stem'], save)
