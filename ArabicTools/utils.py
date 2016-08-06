@@ -14,6 +14,12 @@ def check_special_letters(special_letters):
 
 
 def gen_origin_pattern(origin_form, specials):
+    '''Replace the first instance of each special key in the origin string
+    with the regex stored in its value. Replace every following instance of
+    that 'special' key with a regex capture group referring to the previous
+    capture group.
+    '''
+    # FIXME: this is naive and really insecure
     special_letters = specials.keys()
     check_special_letters(special_letters)
     origin_pattern = ''
@@ -31,6 +37,11 @@ def gen_origin_pattern(origin_form, specials):
 
 
 def gen_result_pattern(result_form, specials):
+    '''Replace all of the instances of each special key in the result string
+    with "{n}" where "n" is the number of the corresponding group in the origin
+    string.
+    '''
+    # FIXME: this is naive and insecure
     result_pattern = ''
     special_letters = specials.keys()
     check_special_letters(special_letters)
@@ -43,6 +54,37 @@ def gen_result_pattern(result_form, specials):
 
 
 def apply(origin_form, specials, word, result_form):
+    '''Generate applicable match-string and template from specials,
+    origin_form, and result_form, then match the word against the match-string,
+    then finally use the match data to fill in the template
+
+    e.g.
+    apply("f 3 l", sound_triliteral, "d r s", "fa33ala")  -> "darrasa"
+    apply("fa33ala", sound_triliteral, "kattaba", "taf3eel") -> "takteeb"
+
+    Remember that a <specials> can contain any combination of keys
+    corresponding to any value (each key can also be a different value).
+    
+    e.g.
+    apply("g v c", alternate_triliteral, "k t b", "gavvaca") -> "kattaba"
+    apply("2 3 l", assimilated_triliteral, "2 k l", "2aa3il") -> "2aakil"
+    
+    Note that since <specials> only determines how the human-readable
+    origin_form and result_form strings are turned into machine-readable
+    strings, there is no problem with using an origin word containing letters
+    that are keys in <specials>:
+
+    e.g.
+    apply("fa33ala", sound_triliteral, "fa33ala", "taf3eel") -> "taf3eel"
+
+    Where:
+
+    * sound_triliteral is a SpecialSet with the following keys and values (not
+      actual syntax) {"f": sound_letters, "3": sound_letters, "l":
+      sound_letters}
+    * sound_letters is a string containing regex that matches one instance of
+      any one sound Arabic consonant.
+    '''
     origin_pattern = gen_origin_pattern(origin_form, specials)
     match = re.match(origin_pattern, word)
     if not match:
@@ -52,6 +94,10 @@ def apply(origin_form, specials, word, result_form):
 
 
 def transcribe(spelling, code):
+    '''Transcribe the string in <spelling> using <code>. <code> must be a
+    dictionary-like object with each key representing a character in original
+    spelling and each value representing a transcribed character.
+    '''
     output = ''
     for letter in spelling:
         if letter in code:
@@ -74,7 +120,8 @@ def strip_diacritics(spelling, leave=[]):
 
 
 def attributes_to_dict(attributes):
-    '''Converts a string containing attributes to a Python dictionary without performing any validation
+    '''Converts a string containing attributes to a Python dictionary without
+    performing any validation
     '''
     lines = attributes.split('\n')
     dict_out = {}
@@ -85,8 +132,7 @@ def attributes_to_dict(attributes):
 
 
 def dict_to_attributes(dict_in):
-    ''' Converts a Python dictionary to a string containing attributes
-    '''
+    '''Converts a Python dictionary to a string containing attributes'''
     attributes = []
     for attribute, value in dict_in:
         attributes += [attribute + ':' + value + '\n']
