@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView, CreateView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import TemplateView, DetailView, CreateView, FormView
 from Dictionary.models import Word, Pattern
-from Dictionary.forms import WordForm, PatternForm
+from Dictionary.forms import WordForm, PatternForm, PatternApplyForm
 
 
 class HomeView(TemplateView):
@@ -33,3 +33,23 @@ class AddPatternView(CreateView):
     template_name = 'add_pattern.html'
     model = Pattern
     form_class = PatternForm
+
+
+def apply_pattern(request, pk):
+    '''View to apply the pattern with id <pk> to the word selected via the
+    attached form (instance of PatternApplyForm), and save the result to DB.
+    '''
+    pattern = get_object_or_404(Pattern, pk=pk)
+    if request.method == 'POST':
+        form = PatternApplyForm(request.POST)
+        if form.is_valid():
+            new_word = form.apply(pattern)
+            return redirect('main:word', pk=new_word.pk)
+    else:
+        form = PatternApplyForm()
+        queryset = form.fields['stem'].queryset 
+        queryset = queryset.filter(pos=pattern.origin_pos)
+        # TODO: generate a regex for spellings that match the origin form of
+        # this pattern and filter the queryset with it
+    context = {'pattern': pattern, 'form': form}
+    return render(request, 'apply_pattern.html', context)

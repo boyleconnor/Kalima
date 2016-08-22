@@ -24,4 +24,8 @@
 		<td>{{ word.result_pos }}</td>
 	</tr>
 </table>
+
+{% if user.is_superuser %}
+    <a href="{% url 'main:apply_pattern' pk=pattern.pk %}">{% trans 'Apply pattern' %}</a>
+{% endif %}
 {% endblock %}

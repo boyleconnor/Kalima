@@ -132,7 +132,8 @@ def attributes_to_dict(attributes):
 
 
 def dict_to_attributes(dict_in):
-    '''Converts a Python dictionary to a string containing attributes'''
+    '''Converts a Python dictionary to a string containing attributes
+    '''
     attributes = []
     for attribute, value in dict_in:
         attributes += [attribute + ':' + value + '\n']
