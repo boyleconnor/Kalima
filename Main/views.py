@@ -29,10 +29,20 @@ class PatternView(DetailView):
     model = Pattern
 
 
-class AddPatternView(CreateView):
-    template_name = 'add_pattern.html'
-    model = Pattern
-    form_class = PatternForm
+def add_pattern(request):
+    '''(View) add a pattern using the POST data, if it is valid, then redirect
+    to it. If the POST data is not valid, render a page with the invalid fields
+    marked.
+    '''
+    if request.method == 'POST':
+        form = PatternForm(request.POST)
+        if form.is_valid():
+            pattern = form.save()
+            return redirect('main:pattern', pk=pattern.pk)
+    else:
+        form = PatternForm()
+    context = {'form': form}
+    return render(request, 'add_pattern.html', context)
 
 
 def apply_pattern(request, pk):
