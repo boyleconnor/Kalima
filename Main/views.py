@@ -24,9 +24,11 @@ class AddWordView(CreateView):
     form_class = WordForm
 
 
-class PatternView(DetailView):
-    template_name = 'pattern.html'
-    model = Pattern
+def view_pattern(request, pk):
+    '''Detail view for pattern.
+    '''
+    context = {'pattern': get_object_or_404(Pattern, pk=pk)}
+    return render(request, 'pattern.html', context)
 
 
 def add_pattern(request):
