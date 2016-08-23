@@ -16,6 +16,29 @@
 			<td>{{ word.definition }}</td>
 		</tr>
 		{% endfor %}
+	</table>
+	<table>
+		<tr>
+			<th rowspan=2>{% trans 'Pattern' %}</th>
+			<th colspan=2>{% trans 'Origin' %}</th>
+			<th colspan=2>{% trans 'Result' %}</th>
+		</tr>
+		<tr>
+                        <th>{% trans 'Part of Speech' %}</th>
+			<th>{% trans 'Form' %}</th>
+			<th>{% trans 'Part of Speech' %}</th>
+			<th>{% trans 'Form' %}</th>
+		</tr>
+		{% for pattern in patterns %}
+		<tr>
+			<td><a href="{% url "main:pattern" pk=pattern.pk %}">{{ pattern.name }}</a></td>
+                        <td>{{ pattern.get_origin_pos_display }}</td>
+                        <td>{{ pattern.origin_form }}</td>
+                        <td>{{ pattern.get_result_pos_display }}</td>
+                        <td>{{ pattern.result_form }}</td>
+		</tr>
+		{% endfor %}
+	</table>
 		{% if user.is_superuser %}
 		<tr>
 			<td><a href="{% url 'main:add_word' %}"><i>{% trans 'Add word' %}</i></a>
@@ -26,5 +49,4 @@
 			<td colspan=2></td>
 		</tr>
 		{% endif %}
-	</table>
 {% endblock %}

@@ -10,6 +10,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['words'] = Word.objects.order_by('?')
+        context['patterns'] = Pattern.objects.order_by('?')
         return context
 
 
