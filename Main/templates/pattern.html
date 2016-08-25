@@ -27,5 +27,6 @@
 
 {% if user.is_superuser %}
     <a href="{% url 'main:apply_pattern' pk=pattern.pk %}">{% trans 'Apply pattern' %}</a>
+    <a href="{% url 'main:edit_pattern' pk=pattern.pk %}">{% trans 'Edit pattern' %}</a>
 {% endif %}
 {% endblock %}

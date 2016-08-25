@@ -48,6 +48,21 @@ def add_pattern(request):
     return render(request, 'add_pattern.html', context)
 
 
+def edit_pattern(request, pk):
+    '''Edit view for pattern
+    '''
+    pattern = get_object_or_404(Pattern, pk=pk)
+    if request.method == 'POST':
+        form = PatternForm(request.POST, instance=pattern)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('main:pattern', pk=pattern.pk)
+    else:
+        form = PatternForm(instance=pattern)
+    context = {'pattern': pattern, 'form': form}
+    return render(request, 'edit_pattern.html', context)
+
+
 def apply_pattern(request, pk):
     '''View to apply the pattern with id <pk> to the word selected via the
     attached form (instance of PatternApplyForm), and save the result to DB.

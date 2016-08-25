@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Editing Pattern: " %}{{ pattern.name }}{% endblock %}
+
+{% block content %}
+<form method="POST">
+<table>
+    {{ form.as_table }}
+    <tr>
+        <td><input type="submit" label="{% trans "Submit" %}"></td>
+    </tr>
+    {% csrf_token %}
+</table>
+{% endblock %}
