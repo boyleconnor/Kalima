@@ -81,3 +81,15 @@ def apply_pattern(request, pk):
         # this pattern and filter the queryset with it
     context = {'pattern': pattern, 'form': form}
     return render(request, 'apply_pattern.html', context)
+
+def delete_pattern(request, pk):
+    '''Delete the Pattern with personal key <pk> (confirmation page on GET,
+    perform deletion on POST).
+    '''
+    pattern = get_object_or_404(Pattern, pk=pk)
+    context = {'pattern': pattern}
+    if request.method == 'POST':
+        pattern.delete()
+        return redirect('main:home')
+    else:
+        return render(request, 'delete_pattern.html', context)

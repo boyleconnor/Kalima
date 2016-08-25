@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from Main.views import HomeView, WordView, AddWordView, view_pattern, add_pattern, apply_pattern, edit_pattern
+from Main.views import HomeView, WordView, AddWordView, view_pattern, add_pattern, apply_pattern, edit_pattern, delete_pattern
 
 
 urlpatterns = patterns('',
@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url('^pattern/add/$', add_pattern, name='add_pattern'),
     url('^pattern/(?P<pk>\d+)/apply/$', apply_pattern, name='apply_pattern'),
     url('^pattern/(?P<pk>\d+)/edit/$', edit_pattern, name='edit_pattern'),
+    url('^pattern/(?P<pk>\d+)/delete/$', delete_pattern, name='delete_pattern'),
 )

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Delete Pattern: " %}{{ pattern.name }}{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <input type="submit" value="{% trans 'Delete' %}">
+    {% csrf_token %}
+</form>
+{% endblock %}
