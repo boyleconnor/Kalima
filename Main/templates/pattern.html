@@ -25,6 +25,24 @@
 	</tr>
 </table>
 
+<table>
+	<tr>
+		<th colspan="3">{% trans 'Descendants' %}</th>
+	</tr>
+	<tr>
+		<th>{% trans 'Word' %}</th>
+		<th>{% trans 'Part of Speech' %}</th>
+		<th>{% trans 'Definition' %}</th>
+	</tr>
+	{% for descendant in pattern.words.all %}
+	<tr>
+		<td><a href="{% url "main:word" pk=descendant.pk %}">{{ descendant }}</a></td>
+		<td>{{ descendant.get_pos_display }}</td>
+		<td>{{ descendant.get_definition_display }}</td>
+	</tr>
+	{% endfor %}
+</table>
+
 {% if user.is_superuser %}
     <a href="{% url 'main:apply_pattern' pk=pattern.pk %}">{% trans 'Apply pattern' %}</a>
     <a href="{% url 'main:edit_pattern' pk=pattern.pk %}">{% trans 'Edit pattern' %}</a>
