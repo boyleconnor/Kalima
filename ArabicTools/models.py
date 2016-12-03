@@ -1,4 +1,6 @@
 from django.db.models import Model, CharField, ForeignKey
+from ArabicTools.constants import DEFAULT_ROOT_SPELLING
+from ArabicTools.utils import apply
 
 
 class SpecialSet(Model):
@@ -32,3 +34,23 @@ class Special(Model):
     special_set = ForeignKey(SpecialSet, related_name='specials')
     key = CharField(max_length=1)
     value = CharField(max_length=4096)
+
+
+class Pattern(Model):
+    '''A pattern of one string onto another, wherein the "special" letters
+    represent variables in the template
+    '''
+    special_set = ForeignKey(SpecialSet, related_name='patterns')
+    origin_form = CharField(max_length=255, default=DEFAULT_ROOT_SPELLING)
+    result_form = CharField(max_length=255)
+
+    def generate_spelling(self, origin_spelling):
+        return apply(
+            origin_form=self.origin_form,
+            specials=self.special_set.get_specials(),
+            word=origin_spelling,
+            result_form=self.result_form
+        )
+
+    def __str__(self):
+        return self.get_result_form()
