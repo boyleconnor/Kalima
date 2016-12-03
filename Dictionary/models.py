@@ -1,7 +1,8 @@
 import re
 from ArabicTools.constants import POS_CHOICES
-from ArabicTools.mixins import AbstractPattern, Spellable
-from django.db.models import Model, CharField, ForeignKey, TextField
+from ArabicTools.mixins import Spellable
+from ArabicTools.models import Pattern
+from django.db.models import Model, CharField, ForeignKey, OneToOneField, TextField
 from rest_framework.reverse import reverse_lazy
 
 
@@ -10,7 +11,7 @@ class Word(Spellable):
     definition = TextField()
     examples = TextField(blank=True)
     parent = ForeignKey('Word', blank=True, null=True, related_name='derivatives')
-    pattern = ForeignKey('Dictionary.Pattern', blank=True, null=True, related_name='words')
+    deriver = ForeignKey('Dictionary.Deriver', blank=True, null=True, related_name='words')
 
     def get_root(self):
         stem = self.stem
@@ -34,16 +35,21 @@ class Word(Spellable):
         return inflections 
 
 
-class Pattern(AbstractPattern):
-    origin_pattern = ForeignKey('Dictionary.Pattern', blank=True, null=True, related_name='result_patterns')
-    result_model = Word
+class Deriver(Model):
+    origin_deriver = ForeignKey('self', blank=True, null=True, related_name='result_derivers')
     origin_pos = CharField(max_length=16, choices=POS_CHOICES)
     result_pos = CharField(max_length=16, choices=POS_CHOICES)
     paradigm = ForeignKey('Inflections.Paradigm', blank=True, null=True)
+    pattern = OneToOneField('ArabicTools.Pattern')
     name = CharField(max_length=63, blank=True)
 
-    def apply(self, *args, **kwargs):
-        return super(Pattern, self).apply(pos=self.result_pos, *args, **kwargs)
+    def apply(self, origin, *args, **kwargs):
+        return Word.objects.create(
+            spelling=self.pattern.generate_spelling(origin_spelling=origin.spelling),
+            pos=self.result_pos,
+            deriver=self,
+            parent=origin
+        )
 
     def get_absolute_url(self):
         return reverse_lazy('dictionary:pattern.detail', kwargs={'pk': self.pk})
